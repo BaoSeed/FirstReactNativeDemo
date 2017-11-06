@@ -1,7 +1,7 @@
 /**
  * 2017.10.17 Ivan
  */
-import React, { Component } from 'react';
+import React from 'react';
 import {
     StyleSheet,
     Text,
@@ -11,7 +11,7 @@ import {
 
 
 //export default是一个可以导出的组件
-export default class Button extends Component<{}> {
+export default class MyButton extends React.Component {
 
     //构造
     constructor(props){
@@ -44,6 +44,13 @@ export default class Button extends Component<{}> {
 
           disable:true,
       });
+
+      //this.setState(previousState => {
+
+         //return {show}
+
+     //});
+
     };
 
     render() {
@@ -64,7 +71,6 @@ export default class Button extends Component<{}> {
         );
     }
 }
-
 
 
 const styles = StyleSheet.create({
