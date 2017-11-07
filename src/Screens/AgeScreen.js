@@ -9,7 +9,9 @@ import {
     TouchableHighlight ,
     NavigatorIOS,
 } from 'react-native';
+
 import NameEditScreen from "./NameEditScreen";
+import MapView        from '../Native Components/ios/MapView';
 
 
 export default class  AgeScreen extends  React.Component {
@@ -58,6 +60,9 @@ export default class  AgeScreen extends  React.Component {
                     onPress={this._onForward}>
                     <Text style={styles.welcome}>点击编辑姓名</Text>
                 </TouchableHighlight>
+
+                <MapView style={{ flex: 1 }} />
+
             </View>
 
         );

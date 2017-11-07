@@ -8,6 +8,7 @@
  */
 
 #import "AppDelegate.h"
+#import <EventKit/EventKit.h>
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -18,6 +19,8 @@
 {
   NSURL *jsCodeLocation;
 
+  
+  
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 

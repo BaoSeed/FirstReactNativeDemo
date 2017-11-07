@@ -14,6 +14,7 @@ import {
     FlatList,
     SectionList,
     NavigatorIOS,
+    NativeModules,
 
 } from 'react-native';
 
@@ -21,11 +22,13 @@ import {
 import { StackNavigator}from 'react-navigation'
 
 //导入同级目录下的src文件夹..
-import MyButton       from "./src/MyButton";
+import MyButton       from "./src/components/comman/MyButton";
 import MainScreen     from "./src/Screens/MainScreen";
 import ProfileScreen  from "./src/Screens/ProfileScreen";
 import NameEditScreen from "./src/Screens/NameEditScreen";
 import AgeScreen      from "./src/Screens/AgeScreen";
+import ToastExample   from './src/Native Modules/android/ToastExample';
+
 
 
 const instructions = Platform.select({
@@ -81,7 +84,7 @@ export default class App extends React.Component {
     //组件已经加载
     componentDidMount() {
 
-
+        //ToastExample.show('Awesome', ToastExample.SHORT);
 
     }
 
@@ -124,6 +127,7 @@ export default class App extends React.Component {
          // 试试去掉父View中的`flex: 1`。
          // 则父View不再具有尺寸，因此子组件也无法再撑开。
          // 然后再用`height: 300`来代替父View的`flex: 1`试试看？
+
          /*
          <View >
              <View style={{flex: 1, backgroundColor: 'powderblue'}} />
@@ -156,6 +160,8 @@ export default class App extends React.Component {
 
          //<SimpleApp/>
 
+
+
          <NavigatorIOS
              //此项不设置,创建的导航控制器只能看见导航条而看不到界面
              style={{flex: 1}}
@@ -164,11 +170,36 @@ export default class App extends React.Component {
                  component: AgeScreen,
                  title: 'AgeScreen',
                  leftButtonTitle:'左边',
-                 onLeftButtonPress:() => {alert('左边')},
+                 onLeftButtonPress:() => {
+
+                     var calendarManager = NativeModules.CalendarManager;
+
+                     //calendarManager.addEvent('Birthday Party', '4 Privet Drive, Surrey',date.toISOString());
+
+
+                     calendarManager.findEvents((error, events) => {
+
+                         if (error) {
+
+                             console.error(error);
+                             alert('查找失败');
+
+                         } else {
+
+                             this.setState({events: events});
+
+                             alert('查找成功');
+                         }
+                     });
+
+                    //导出常量
+                     console.log(calendarManager.firstDayOfTheWeek);
+                 },
                  rightButtonTitle:'右边',
                  onRightButtonPress:() => {alert('右边')}
              }}
          />
+
 
      );
 

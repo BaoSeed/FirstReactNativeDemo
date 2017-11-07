@@ -6,7 +6,6 @@ import {
     Text,
     View,
     Button,
-    NativeModules,
 } from 'react-native';
 
 

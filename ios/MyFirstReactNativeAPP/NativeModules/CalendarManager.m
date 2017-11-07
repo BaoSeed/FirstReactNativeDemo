@@ -14,10 +14,31 @@
 //如果你不指定，默认就会使用这个Objective-C类的名字。
 RCT_EXPORT_MODULE();
 
+//自己指定模块的名字
+//RCT_EXPORT_MODULE(MyCalendarManager);
+
 //你必须明确的声明要给 Javascript 导出的方法，否则 React Native 不会导出任何方法。声明通过 RCT_EXPORT_METHOD() 宏来实现：
-RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
+RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(NSDate *)date)
 {
   RCTLogInfo(@"Pretending to create an event %@ at %@", name, location);
+
+
+
 }
+
+RCT_EXPORT_METHOD(findEvents:(RCTResponseSenderBlock)callback)
+{
+  NSArray *events = @[];
+  callback(@[[NSNull null], events]);
+}
+
+
+- (NSDictionary *)constantsToExport{
+  
+  return @{ @"firstDayOfTheWeek": @"Monday"};
+
+}
+
+
 
 @end
