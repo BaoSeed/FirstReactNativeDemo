@@ -6,15 +6,19 @@ import {
     View,
     TouchableHighlight ,
     TouchableOpacity,
-    NavigatorIOS,
-
     NativeModules,
     LayoutAnimation
 
 } from 'react-native';
 
-import FadeInView  from "../components/comman/FadeInView";
 
+import FadeInView  from '../../components/comman/FadeInView';
+
+//这么写，渲染不出来
+//var FadeInView = require('../../components/comman/FadeInView');
+
+//这么写不行啊，路径问题
+//var {FadeInView} = require('/main.js');
 
 
 const { UIManager } = NativeModules;

@@ -14,7 +14,7 @@ RCT_EXPORT_MODULE();
 
 - (UIView *)view{
   
-  return [[MKMapView alloc]init];
+  return [[MKMapView alloc]init]
   
 }
 

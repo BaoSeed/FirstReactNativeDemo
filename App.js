@@ -15,6 +15,9 @@ import {
     SectionList,
     NavigatorIOS,
     NativeModules,
+    MaskedViewIOS,
+    Modal,
+    TouchableHighlight,
 
 } from 'react-native';
 
@@ -22,12 +25,12 @@ import {
 import { StackNavigator}from 'react-navigation'
 
 //导入同级目录下的src文件夹..
-import MyButton       from "./src/components/comman/MyButton";
-import MainScreen     from "./src/Screens/MainScreen";
-import ProfileScreen  from "./src/Screens/ProfileScreen";
-import NameEditScreen from "./src/Screens/NameEditScreen";
-import AgeScreen      from "./src/Screens/AgeScreen";
-import ToastExample   from './src/Native Modules/android/ToastExample';
+import MyButton       from './src/components/comman/MyButton';
+import MainScreen     from './src/screens/comman/MainScreen';
+import ProfileScreen  from './src/screens/comman/ProfileScreen';
+import NameEditScreen from './src/screens/comman/NameEditScreen';
+import AgeScreen      from './src/screens/comman/AgeScreen';
+import ToastExample   from './src/nativemodules/android/ToastExample';
 
 
 
@@ -60,10 +63,21 @@ export default class App extends React.Component {
     constructor(props){
         super(props);
 
-        this.state = {status:1};
+        this.state = {
+
+            status:1,
+            modalVisible: false,
+        };
 
     }
 
+    setModalVisible(visible) {
+
+        this.setState({
+
+            modalVisible: visible,
+        });
+    }
 
     //网络获取数据，类似于block
     fetchData = (enableCallback)=>{
@@ -140,9 +154,10 @@ export default class App extends React.Component {
          //<FlexDirectionBasics />
 
          //FlatList
-         //<FlatListBasics/>
+        /// <FlatListBasics/>
 
         //<SectionListBasics/>
+
 
          /*
          fetch('https://facebook.github.io/react-native/movies.json')
@@ -155,13 +170,62 @@ export default class App extends React.Component {
 
                  console.error(error);
              })
-*/
+          */
          //<Button ref="confirmBtn" text="Go to Jane`s profile" bgColor="red"  object:{{a:'b'}} handler={this.fetchData()} />
 
          //<SimpleApp/>
 
 
+         /*
+         <MaskedViewIOS
+             style={{ flex: 1,backgroundColor:'yellow' }}
+             maskElement={
 
+                 <View style={styles.maskContainerStyle}>
+                     <Text style={styles.maskTextStyle}>
+                         Basic Mask
+                     </Text>
+                 </View>
+             }
+         >
+             <View style={{ flex: 1, backgroundColor: 'blue' }} />
+
+         </MaskedViewIOS>
+
+       */
+
+
+      <View style={{marginTop: 64}}>
+        <Modal
+          animationType="fade"
+          presentationStyle="overFullScreen"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {alert("Modal has been closed.")}}
+          >
+         <View style={{marginTop: 64}}>
+          <View>
+            <Text style={styles.item}>Hello World!</Text>
+            <TouchableHighlight onPress={() => {
+              this.setModalVisible(!this.state.modalVisible)
+            }}>
+              <Text style={styles.item}>Hide Modal</Text>
+            </TouchableHighlight>
+          </View>
+         </View>
+        </Modal>
+
+        <TouchableHighlight onPress={() => {
+          this.setModalVisible(true)
+        }}>
+          <Text style={styles.item}>Show Modal</Text>
+        </TouchableHighlight>
+
+      </View>
+
+
+
+         /*
          <NavigatorIOS
              //此项不设置,创建的导航控制器只能看见导航条而看不到界面
              style={{flex: 1}}
@@ -199,7 +263,7 @@ export default class App extends React.Component {
                  onRightButtonPress:() => {alert('右边')}
              }}
          />
-
+*/
 
      );
 
@@ -233,6 +297,8 @@ class Blink extends React.Component {
         );
     }
 }
+
+
 //3、使用Flexbox布局
 //3.1 Flex Direction
 class FlexDirectionBasics extends React.Component {
@@ -254,34 +320,40 @@ class FlexDirectionBasics extends React.Component {
         );
     }
 }
+
+
 //4、ListView
 //4.1 FlatList
 class FlatListBasics extends React.Component {
+
     render() {
         return (
+
             <View style={styles.FlatContainer}>
 
                 <FlatList
-    data={[
+                  data={[
+                   {key: 'Devin'},
+                   {key: 'Jackson'},
+                   {key: 'James'},
+                   {key: 'Joel'},
+                   {key: 'John'},
+                   {key: 'Jillian'},
+                   {key: 'Jimmy'},
+                   {key: 'Julie'},
+                  ]}
+                  renderItem={({item}) =>
 
-        {key: 'Devin'},
-        {key: 'Jackson'},
-        {key: 'James'},
-        {key: 'Joel'},
-        {key: 'John'},
-        {key: 'Jillian'},
-        {key: 'Jimmy'},
-        {key: 'Julie'},
-    ]}
+                      <Text style={styles.item}> {item.key} </Text>
 
-    renderItem={({item}) => <Text style={styles.item}> {item.key} </Text>}
-
-    />
-
+                  }
+                />
             </View>
         );
     }
 }
+
+
 class SectionListBasics extends React.Component {
     render() {
         return (
@@ -308,17 +380,20 @@ class SectionListBasics extends React.Component {
 
 const styles = StyleSheet.create({
 
+
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+
   welcome: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
   },
+
   instructions: {
     textAlign: 'center',
     color: '#333333',
@@ -327,15 +402,15 @@ const styles = StyleSheet.create({
 
     FlatContainer: {
         flex: 1,
-        top:50,
-        paddingTop: 80,
+        top:64,
+        paddingTop: 20,
         backgroundColor:'red'
     },
 
     item: {
-        padding: 10,
         fontSize: 18,
         height: 44,
+        marginLeft:20
     },
 
 
@@ -343,6 +418,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 22
     },
+
     sectionHeader: {
         paddingTop: 2,
         paddingLeft: 10,
@@ -359,4 +435,16 @@ const styles = StyleSheet.create({
         height: 44,
     },
 
+
+
+    maskContainerStyle:{
+
+
+
+    },
+
+    maskTextStyle:{
+
+
+    }
 });
