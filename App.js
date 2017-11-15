@@ -18,11 +18,15 @@ import {
     MaskedViewIOS,
     Modal,
     TouchableHighlight,
+    StatusBar,
+    Switch,
+    TabBarIOS,
 
 } from 'react-native';
 
 
 import { StackNavigator}from 'react-navigation'
+
 
 //导入同级目录下的src文件夹..
 import MyButton       from './src/components/comman/MyButton';
@@ -67,6 +71,8 @@ export default class App extends React.Component {
 
             status:1,
             modalVisible: false,
+            selectedTab:'first'
+
         };
 
     }
@@ -195,6 +201,7 @@ export default class App extends React.Component {
        */
 
 
+         /*
       <View style={{marginTop: 64}}>
         <Modal
           animationType="fade"
@@ -222,15 +229,27 @@ export default class App extends React.Component {
         </TouchableHighlight>
 
       </View>
+*/
 
-
-
-         /*
+          /*
          <NavigatorIOS
              //此项不设置,创建的导航控制器只能看见导航条而看不到界面
              style={{flex: 1}}
              barTintColor='#ffffcc'
+             renderScene={(route, navigator) =>
+                 <View>
+                     <StatusBar
+                         animated={true}
+                         hidden={route.statusBarHidden}
+                         barStyle='dark-content'
+                         showHideTransition='slide'
+                         backgroundColor="blue"
+                     />
+
+                 </View>
+             }
              initialRoute={{
+                 statusBarHidden:false,
                  component: AgeScreen,
                  title: 'AgeScreen',
                  leftButtonTitle:'左边',
@@ -239,7 +258,6 @@ export default class App extends React.Component {
                      var calendarManager = NativeModules.CalendarManager;
 
                      //calendarManager.addEvent('Birthday Party', '4 Privet Drive, Surrey',date.toISOString());
-
 
                      calendarManager.findEvents((error, events) => {
 
@@ -263,8 +281,56 @@ export default class App extends React.Component {
                  onRightButtonPress:() => {alert('右边')}
              }}
          />
-*/
+         */
 
+
+         <TabBarIOS
+             unselectedTintColor="yellow"
+             tintColor="white"
+             barTintColor="darkslateblue">
+
+             <TabBarIOS.Item
+                 title="Blue Tab"
+                 selected={this.state.selectedTab === 'first'}
+                 onPress={()=>{
+                     this.setState({
+                         selectedTab: 'first',
+                     });
+                 }}>
+                 <Text style={styles.welcome}>'我是第一个'</Text>
+             </TabBarIOS.Item>>
+
+
+             <TabBarIOS.Item
+                 systemIcon="history"
+                 badge='1'
+                 selected={this.state.selectedTab === 'second'}
+                 onPress={() => {
+                       this.setState({
+                          selectedTab:'second',
+                       });
+                 }}>
+                 <Text style={styles.welcome}>'我是第二个'</Text>
+             </TabBarIOS.Item>>
+
+
+             <TabBarIOS.Item
+                 icon={require('./flux.png')}
+                 selectedIcon={require('./relay.png')}
+                 renderAsOriginal
+                 title="More"
+                 selected={this.state.selectedTab === 'third'}
+                 onPress={() => {
+                     this.setState({
+                         selectedTab: 'third',
+                     });
+                 }}>
+                 <Text style={styles.welcome}>'我是第三个'</Text>
+             </TabBarIOS.Item>
+
+
+
+         </TabBarIOS>
      );
 
      }
@@ -342,6 +408,7 @@ class FlatListBasics extends React.Component {
                    {key: 'Jimmy'},
                    {key: 'Julie'},
                   ]}
+
                   renderItem={({item}) =>
 
                       <Text style={styles.item}> {item.key} </Text>

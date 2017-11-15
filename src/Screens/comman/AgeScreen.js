@@ -15,6 +15,9 @@ import {
     KeyboardAvoidingView,
     SegmentedControlIOS,
     TextInput,
+    ProgressBarAndroid,
+    Switch,
+
 } from 'react-native';
 
 
@@ -52,6 +55,7 @@ export default class  AgeScreen extends  React.Component {
             subname:'点击编辑姓名',
 
             behavior: 'padding',
+            switchValue:false,
         };
     }
 
@@ -85,11 +89,14 @@ export default class  AgeScreen extends  React.Component {
 
     render() {
 
+        var progressBar =
+            <View style={styles.container}>
+                <ProgressBarAndroid styleAttr="Inverse" />
+            </View>;
+
         return (
 
-
                 <KeyboardAvoidingView
-
                     behavior={this.state.behavior}
                     style={styles.containerAvoid}>
 
@@ -116,20 +123,32 @@ export default class  AgeScreen extends  React.Component {
                         style={styles.textInput} />
 
 
-                <Button
-                    onPress={this._onForward}
-                    title="Learn More"
-                    color="#841584"
-                    backgroundColor='red'
-                    accessibilityLabel="Learn more about this purple button"
-                />
+                    <Button
+                     onPress={this._onForward}
+                     title="Learn More"
+                     color="#841584"
+                     backgroundColor='red'
+                     accessibilityLabel="Learn more about this purple button"
+                    />
 
-                <CheckBox
-                    style={{padding: 10,margin:50}}
-                    value={false}
-                    disabled={false}
-                    onValueChange={this._onForward}
-                />
+                    <CheckBox
+                     style={{padding: 10,margin:50}}
+                     value={false}
+                     disabled={false}
+                     onValueChange={this._onForward}
+                    />
+
+                    <Switch
+                        value={this.state.switchValue}
+                        onTintColor='red'
+                        thumbTintColor='blue'
+                        tintColor='yellow'
+                        onValueChange={(value)=> {
+                            this.setState({
+                                switchValue: value,
+                            });
+                        }}
+                    />
 
                 <DatePickerIOS
                     date={this.state.date}
@@ -138,7 +157,6 @@ export default class  AgeScreen extends  React.Component {
                     onDateChange={this._onDateChange}
                     minuteInterval={10}
                 />
-
                 </KeyboardAvoidingView>
 
         );
