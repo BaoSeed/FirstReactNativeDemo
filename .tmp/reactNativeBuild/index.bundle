@@ -58358,6 +58358,26 @@ var _MyButton = require(557                               ); // 557 = ./src/comp
 
 var _MyButton2 = _interopRequireDefault(_MyButton);
 
+var _HomeScreen = require(565                              ); // 565 = ./src/screens/comman/HomeScreen
+
+var _HomeScreen2 = _interopRequireDefault(_HomeScreen);
+
+var _ProductScreen = require(566                                 ); // 566 = ./src/screens/comman/ProductScreen
+
+var _ProductScreen2 = _interopRequireDefault(_ProductScreen);
+
+var _MineScreen = require(567                              ); // 567 = ./src/screens/comman/MineScreen
+
+var _MineScreen2 = _interopRequireDefault(_MineScreen);
+
+var _AgeScreen = require(562                             ); // 562 = ./src/screens/comman/AgeScreen
+
+var _AgeScreen2 = _interopRequireDefault(_AgeScreen);
+
+var _NameEditScreen = require(560                                  ); // 560 = ./src/screens/comman/NameEditScreen
+
+var _NameEditScreen2 = _interopRequireDefault(_NameEditScreen);
+
 var _MainScreen = require(558                              ); // 558 = ./src/screens/comman/MainScreen
 
 var _MainScreen2 = _interopRequireDefault(_MainScreen);
@@ -58365,14 +58385,6 @@ var _MainScreen2 = _interopRequireDefault(_MainScreen);
 var _ProfileScreen = require(559                                 ); // 559 = ./src/screens/comman/ProfileScreen
 
 var _ProfileScreen2 = _interopRequireDefault(_ProfileScreen);
-
-var _NameEditScreen = require(560                                  ); // 560 = ./src/screens/comman/NameEditScreen
-
-var _NameEditScreen2 = _interopRequireDefault(_NameEditScreen);
-
-var _AgeScreen = require(562                             ); // 562 = ./src/screens/comman/AgeScreen
-
-var _AgeScreen2 = _interopRequireDefault(_AgeScreen);
 
 var _ToastExample = require(564                                       ); // 564 = ./src/nativemodules/android/ToastExample
 
@@ -58389,18 +58401,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var _components = {
     App: {
         displayName: 'App'
-    },
-    Blink: {
-        displayName: 'Blink'
-    },
-    FlexDirectionBasics: {
-        displayName: 'FlexDirectionBasics'
-    },
-    FlatListBasics: {
-        displayName: 'FlatListBasics'
-    },
-    SectionListBasics: {
-        displayName: 'SectionListBasics'
     }
 };
 
@@ -58451,20 +58451,19 @@ var App = _wrapComponent('App')(function (_React$Component) {
         };
 
         _this.state = {
-
             status: 1,
-            modalVisible: false
+            modalVisible: false,
+            selectedTab: 'Home'
         };
 
+        _this._renderContent = _this._renderContent.bind(_this);
         return _this;
     }
 
     _createClass(App, [{
         key: 'setModalVisible',
         value: function setModalVisible(visible) {
-
             this.setState({
-
                 modalVisible: visible
             });
         }
@@ -58477,70 +58476,105 @@ var App = _wrapComponent('App')(function (_React$Component) {
             this.timer && clearTimeout(this.timer);
         }
     }, {
+        key: '_renderContent',
+        value: function _renderContent(pageText, color) {
+            return _react3.default.createElement(
+                _reactNative.View,
+                { style: [styles.container, { backgroundColor: color }], __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 119
+                    }
+                },
+                _react3.default.createElement(
+                    _reactNative.Text,
+                    { style: styles.welcome, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 120
+                        }
+                    },
+                    pageText
+                )
+            );
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
 
-            return _react3.default.createElement(_reactNative.NavigatorIOS, {
-                style: { flex: 1 },
-                barTintColor: '#ffffcc',
-                renderScene: function renderScene(route, navigator) {
-                    return _react3.default.createElement(
-                        _reactNative.View,
-                        {
-                            __source: {
-                                fileName: _jsxFileName,
-                                lineNumber: 237
-                            }
-                        },
-                        _react3.default.createElement(_reactNative.StatusBar, {
-                            animated: true,
-                            hidden: route.statusBarHidden,
-                            barStyle: 'dark-content',
-                            showHideTransition: 'slide',
-                            backgroundColor: 'blue',
-                            __source: {
-                                fileName: _jsxFileName,
-                                lineNumber: 238
-                            }
-                        })
-                    );
-                },
-                initialRoute: {
-                    statusBarHidden: false,
-                    component: _AgeScreen2.default,
-                    title: 'AgeScreen',
-                    leftButtonTitle: '左边',
-                    onLeftButtonPress: function onLeftButtonPress() {
-
-                        var calendarManager = _reactNative.NativeModules.CalendarManager;
-
-                        calendarManager.findEvents(function (error, events) {
-
-                            if (error) {
-
-                                console.error(error);
-                                alert('查找失败');
-                            } else {
-
-                                _this2.setState({ events: events });
-
-                                alert('查找成功');
-                            }
-                        });
-
-                        console.log(calendarManager.firstDayOfTheWeek);
-                    },
-                    rightButtonTitle: '右边',
-                    onRightButtonPress: function onRightButtonPress() {
-                        alert('右边');
+            return _react3.default.createElement(
+                _reactNative.TabBarIOS,
+                {
+                    unselectedTintColor: 'gray',
+                    tintColor: 'aqua',
+                    barTintColor: 'white', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 128
                     }
                 },
-                __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 232
-                }
-            });
+                _react3.default.createElement(
+                    _reactNative.TabBarIOS.Item,
+                    {
+                        title: 'Home',
+                        systemIcon: 'bookmarks',
+                        selected: this.state.selectedTab === 'Home',
+                        onPress: function onPress() {
+                            _this2.setState({ selectedTab: 'Home' });
+                        },
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 133
+                        }
+                    },
+                    _react3.default.createElement(_HomeScreen2.default, {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 139
+                        }
+                    })
+                ),
+                _react3.default.createElement(
+                    _reactNative.TabBarIOS.Item,
+                    {
+                        systemIcon: 'history',
+                        badge: '1',
+                        selected: this.state.selectedTab === 'Product',
+                        onPress: function onPress() {
+                            _this2.setState({ selectedTab: 'Product' });
+                        },
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 142
+                        }
+                    },
+                    _react3.default.createElement(_ProductScreen2.default, {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 148
+                        }
+                    })
+                ),
+                _react3.default.createElement(
+                    _reactNative.TabBarIOS.Item,
+                    {
+                        systemIcon: 'more',
+                        title: 'Mine',
+                        selected: this.state.selectedTab === 'Mine',
+                        onPress: function onPress() {
+                            _this2.setState({ selectedTab: 'Mine' });
+                        },
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 151
+                        }
+                    },
+                    _react3.default.createElement(_MineScreen2.default, {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 157
+                        }
+                    })
+                )
+            );
         }
     }]);
 
@@ -58549,203 +58583,6 @@ var App = _wrapComponent('App')(function (_React$Component) {
 
 exports.default = App;
 
-var Blink = _wrapComponent('Blink')(function (_React$Component2) {
-    _inherits(Blink, _React$Component2);
-
-    function Blink(props) {
-        _classCallCheck(this, Blink);
-
-        var _this3 = _possibleConstructorReturn(this, (Blink.__proto__ || Object.getPrototypeOf(Blink)).call(this, props));
-
-        _this3.state = { showText: true };
-
-        setInterval(function () {
-            _this3.setState(function (previousState) {
-                return { showText: !previousState.showText };
-            });
-        }, 1000);
-        return _this3;
-    }
-
-    _createClass(Blink, [{
-        key: 'render',
-        value: function render() {
-            var display = this.state.showText ? this.props.text : ' ';
-            return _react3.default.createElement(
-                _reactNative.Text,
-                {
-                    __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 310
-                    }
-                },
-                display
-            );
-        }
-    }]);
-
-    return Blink;
-}(_react3.default.Component));
-
-var FlexDirectionBasics = _wrapComponent('FlexDirectionBasics')(function (_React$Component3) {
-    _inherits(FlexDirectionBasics, _React$Component3);
-
-    function FlexDirectionBasics() {
-        _classCallCheck(this, FlexDirectionBasics);
-
-        return _possibleConstructorReturn(this, (FlexDirectionBasics.__proto__ || Object.getPrototypeOf(FlexDirectionBasics)).apply(this, arguments));
-    }
-
-    _createClass(FlexDirectionBasics, [{
-        key: 'render',
-        value: function render() {
-            return _react3.default.createElement(
-                _reactNative.View,
-                { style: {
-
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-
-                    }, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 322
-                    }
-                },
-                _react3.default.createElement(_reactNative.View, { style: { width: 50, height: 50, backgroundColor: 'powderblue' }, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 330
-                    }
-                }),
-                _react3.default.createElement(_reactNative.View, { style: { width: 50, height: 50, backgroundColor: 'skyblue' }, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 331
-                    }
-                }),
-                _react3.default.createElement(_reactNative.View, { style: { width: 50, height: 50, backgroundColor: 'steelblue' }, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 332
-                    }
-                })
-            );
-        }
-    }]);
-
-    return FlexDirectionBasics;
-}(_react3.default.Component));
-
-var FlatListBasics = _wrapComponent('FlatListBasics')(function (_React$Component4) {
-    _inherits(FlatListBasics, _React$Component4);
-
-    function FlatListBasics() {
-        _classCallCheck(this, FlatListBasics);
-
-        return _possibleConstructorReturn(this, (FlatListBasics.__proto__ || Object.getPrototypeOf(FlatListBasics)).apply(this, arguments));
-    }
-
-    _createClass(FlatListBasics, [{
-        key: 'render',
-        value: function render() {
-            return _react3.default.createElement(
-                _reactNative.View,
-                { style: styles.FlatContainer, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 346
-                    }
-                },
-                _react3.default.createElement(_reactNative.FlatList, {
-                    data: [{ key: 'Devin' }, { key: 'Jackson' }, { key: 'James' }, { key: 'Joel' }, { key: 'John' }, { key: 'Jillian' }, { key: 'Jimmy' }, { key: 'Julie' }],
-
-                    renderItem: function renderItem(_ref2) {
-                        var item = _ref2.item;
-                        return _react3.default.createElement(
-                            _reactNative.Text,
-                            { style: styles.item, __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 362
-                                }
-                            },
-                            ' ',
-                            item.key,
-                            ' '
-                        );
-                    },
-                    __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 348
-                    }
-                })
-            );
-        }
-    }]);
-
-    return FlatListBasics;
-}(_react3.default.Component));
-
-var SectionListBasics = _wrapComponent('SectionListBasics')(function (_React$Component5) {
-    _inherits(SectionListBasics, _React$Component5);
-
-    function SectionListBasics() {
-        _classCallCheck(this, SectionListBasics);
-
-        return _possibleConstructorReturn(this, (SectionListBasics.__proto__ || Object.getPrototypeOf(SectionListBasics)).apply(this, arguments));
-    }
-
-    _createClass(SectionListBasics, [{
-        key: 'render',
-        value: function render() {
-            return _react3.default.createElement(
-                _reactNative.View,
-                { style: styles.SectionListcontainer, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 375
-                    }
-                },
-                _react3.default.createElement(_reactNative.SectionList, {
-
-                    sections: [{ title: 'D', data: ['Devin'] }, { title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie'] }],
-
-                    renderItem: function renderItem(_ref3) {
-                        var item = _ref3.item;
-                        return _react3.default.createElement(
-                            _reactNative.Text,
-                            { style: styles.SectionListitem, __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 386
-                                }
-                            },
-                            ' ',
-                            item,
-                            ' '
-                        );
-                    },
-
-                    renderSectionHeader: function renderSectionHeader(_ref4) {
-                        var section = _ref4.section;
-                        return _react3.default.createElement(
-                            _reactNative.Text,
-                            { style: styles.sectionHeader, __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 388
-                                }
-                            },
-                            ' ',
-                            section.title,
-                            ' '
-                        );
-                    },
-                    __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 377
-                    }
-                })
-            );
-        }
-    }]);
-
-    return SectionListBasics;
-}(_react3.default.Component));
 
 var styles = _reactNative.StyleSheet.create({
 
@@ -67903,7 +67740,7 @@ var styles = _reactNative.StyleSheet.create({
 
 });
 }, 557, null, "MyFirstReactNativeAPP/src/components/comman/MyButton.js");
-__d(/* MyFirstReactNativeAPP/src/screens/comman/MainScreen.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+__d(/* MyFirstReactNativeAPP/src/screens/comman/HomeScreen.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
@@ -67919,9 +67756,21 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _class,
     _temp,
-    _jsxFileName = '/Users/Ivan/WebstormProjects/MyFirstReactNativeAPP/src/screens/comman/MainScreen.js';
+    _jsxFileName = '/Users/Ivan/WebstormProjects/MyFirstReactNativeAPP/src/screens/comman/HomeScreen.js';
+
+var _propTypes = require(127         ); // 127 = prop-types
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactNative = require(12            ); // 12 = react-native
+
+var _NameEditScreen = require(560               ); // 560 = ./NameEditScreen
+
+var _NameEditScreen2 = _interopRequireDefault(_NameEditScreen);
+
+var _MapView = require(563                                 ); // 563 = ../../nativecomponents/ios/MapView
+
+var _MapView2 = _interopRequireDefault(_MapView);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67932,13 +67781,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _components = {
-    MainScreen: {
-        displayName: 'MainScreen'
+    AgeScreen: {
+        displayName: 'AgeScreen'
     }
 };
 
 var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
-    filename: '/Users/Ivan/WebstormProjects/MyFirstReactNativeAPP/src/screens/comman/MainScreen.js',
+    filename: '/Users/Ivan/WebstormProjects/MyFirstReactNativeAPP/src/screens/comman/HomeScreen.js',
     components: _components,
     locals: [module],
     imports: [_react3.default]
@@ -67950,58 +67799,197 @@ function _wrapComponent(id) {
     };
 }
 
-var MainScreen = _wrapComponent('MainScreen')((_temp = _class = function (_React$Component) {
-    _inherits(MainScreen, _React$Component);
+var AgeScreen = _wrapComponent('AgeScreen')((_temp = _class = function (_React$Component) {
+    _inherits(AgeScreen, _React$Component);
 
-    function MainScreen() {
-        _classCallCheck(this, MainScreen);
+    function AgeScreen(props, context) {
+        _classCallCheck(this, AgeScreen);
 
-        return _possibleConstructorReturn(this, (MainScreen.__proto__ || Object.getPrototypeOf(MainScreen)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (AgeScreen.__proto__ || Object.getPrototypeOf(AgeScreen)).call(this, props, context));
+
+        _this.onSegmentChange = function (segment) {
+            _this.setState({ behavior: segment.toLowerCase() });
+        };
+
+        _this._onForward = _this._onForward.bind(_this);
+        _this._onDateChange = _this._onDateChange.bind(_this);
+
+        _this.state = {
+
+            date: new Date(),
+            timeZoneOffsetInHours: -1 * new Date().getTimezoneOffset() / 60,
+            name: '我是年龄编辑',
+            subname: '点击编辑姓名',
+
+            behavior: 'padding',
+            switchValue: false
+        };
+        return _this;
     }
 
-    _createClass(MainScreen, [{
+    _createClass(AgeScreen, [{
+        key: '_onForward',
+        value: function _onForward() {
+
+            this.props.navigator.push({
+                component: _NameEditScreen2.default,
+                title: '姓名编辑',
+                passProps: { user: '爆seed' },
+                barTintColor: 'red'
+            });
+        }
+    }, {
+        key: '_onDateChange',
+        value: function _onDateChange(date) {
+
+            this.setState({
+
+                date: date,
+                name: date.getMinutes(),
+                subname: date.getHours()
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
-            var navigate = this.props.navigation.navigate;
+            var _this2 = this;
 
-
-            return _react3.default.createElement(
+            var progressBar = _react3.default.createElement(
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 26
+                        lineNumber: 93
+                    }
+                },
+                _react3.default.createElement(_reactNative.ProgressBarAndroid, { styleAttr: 'Inverse', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 94
+                    }
+                })
+            );
+
+            return _react3.default.createElement(
+                _reactNative.KeyboardAvoidingView,
+                {
+                    behavior: this.state.behavior,
+                    style: styles.containerAvoid, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 99
                     }
                 },
                 _react3.default.createElement(
                     _reactNative.Text,
                     { style: styles.welcome, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 27
+                            lineNumber: 103
                         }
                     },
-                    '\u6211\u662F\u4E3B\u9875'
+                    this.state.name
                 ),
-                _react3.default.createElement(_reactNative.Button, {
-                    onPress: function onPress() {
-                        return navigate('Profile', { user: '爆seed' });
+                _react3.default.createElement(
+                    _reactNative.TouchableHighlight,
+                    {
+                        onPress: this._onForward, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 105
+                        }
                     },
-                    title: 'Go to Profile',
+                    _react3.default.createElement(
+                        _reactNative.Text,
+                        { style: styles.welcome, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 107
+                            }
+                        },
+                        this.state.subname
+                    )
+                ),
+                _react3.default.createElement(_reactNative.ActivityIndicator, {
+                    style: [styles.centering, { transform: [{ scale: 1.5 }] }],
+                    size: 'large',
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 29
+                        lineNumber: 110
+                    }
+                }),
+                _react3.default.createElement(_reactNative.SegmentedControlIOS, {
+                    onValueChange: this.onSegmentChange,
+                    selectedIndex: this.state.behavior === 'padding' ? 0 : 1,
+                    style: styles.segment,
+                    values: ['Padding', 'Position'], __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 115
+                    }
+                }),
+                _react3.default.createElement(_reactNative.TextInput, {
+                    placeholder: '<TextInput />',
+                    style: styles.textInput, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 121
+                    }
+                }),
+                _react3.default.createElement(_reactNative.Button, {
+                    onPress: this._onForward,
+                    title: 'Learn More',
+                    color: '#841584',
+                    backgroundColor: 'red',
+                    accessibilityLabel: 'Learn more about this purple button',
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 126
+                    }
+                }),
+                _react3.default.createElement(_reactNative.CheckBox, {
+                    style: { padding: 10, margin: 50 },
+                    value: false,
+                    disabled: false,
+                    onValueChange: this._onForward,
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 134
+                    }
+                }),
+                _react3.default.createElement(_reactNative.Switch, {
+                    value: this.state.switchValue,
+                    onTintColor: 'red',
+                    thumbTintColor: 'blue',
+                    tintColor: 'yellow',
+                    onValueChange: function onValueChange(value) {
+                        _this2.setState({
+                            switchValue: value
+                        });
+                    },
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 141
+                    }
+                }),
+                _react3.default.createElement(_reactNative.DatePickerIOS, {
+                    date: this.state.date,
+                    mode: 'datetime',
+                    timeZoneOffsetInMinutes: this.state.timeZoneOffsetInHours * 60,
+                    onDateChange: this._onDateChange,
+                    minuteInterval: 10,
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 153
                     }
                 })
             );
         }
     }]);
 
-    return MainScreen;
-}(_react3.default.Component), _class.navigationOptions = {
+    return AgeScreen;
+}(_react3.default.Component), _class.propTypes = {
 
-    title: '主页'
+    route: _propTypes2.default.shape({
+        title: _propTypes2.default.string.isRequired
+    }),
+
+    navigator: _propTypes2.default.object.isRequired
 }, _temp));
 
-exports.default = MainScreen;
+exports.default = AgeScreen;
 
 
 var styles = _reactNative.StyleSheet.create({
@@ -68014,116 +68002,38 @@ var styles = _reactNative.StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         margin: 10
-    }
-});
-}, 558, null, "MyFirstReactNativeAPP/src/screens/comman/MainScreen.js");
-__d(/* MyFirstReactNativeAPP/src/screens/comman/ProfileScreen.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react2 = require(36     ); // 36 = react
-
-var _react3 = _interopRequireDefault(_react2);
-
-var _index = require(160                                                       ); // 160 = ./../../../node_modules/react-transform-hmr/lib/index.js
-
-var _index2 = _interopRequireDefault(_index);
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _class,
-    _temp,
-    _jsxFileName = '/Users/Ivan/WebstormProjects/MyFirstReactNativeAPP/src/screens/comman/ProfileScreen.js';
-
-var _reactNative = require(12            ); // 12 = react-native
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _components = {
-    ProfileScreen: {
-        displayName: 'ProfileScreen'
-    }
-};
-
-var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
-    filename: '/Users/Ivan/WebstormProjects/MyFirstReactNativeAPP/src/screens/comman/ProfileScreen.js',
-    components: _components,
-    locals: [module],
-    imports: [_react3.default]
-});
-
-function _wrapComponent(id) {
-    return function (Component) {
-        return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
-    };
-}
-
-var ProfileScreen = _wrapComponent('ProfileScreen')((_temp = _class = function (_React$Component) {
-    _inherits(ProfileScreen, _React$Component);
-
-    function ProfileScreen() {
-        _classCallCheck(this, ProfileScreen);
-
-        return _possibleConstructorReturn(this, (ProfileScreen.__proto__ || Object.getPrototypeOf(ProfileScreen)).apply(this, arguments));
-    }
-
-    _createClass(ProfileScreen, [{
-        key: 'render',
-        value: function render() {
-            var params = this.props.navigation.state.params;
-
-
-            return _react3.default.createElement(
-                _reactNative.View,
-                { style: styles.container, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 27
-                    }
-                },
-                _react3.default.createElement(
-                    _reactNative.Text,
-                    { style: styles.welcome, __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 28
-                        }
-                    },
-                    '\u6211\u662F ',
-                    params.user
-                )
-            );
-        }
-    }]);
-
-    return ProfileScreen;
-}(_react3.default.Component), _class.navigationOptions = function (_ref) {
-    var navigation = _ref.navigation;
-    return {
-        title: '\u6211\u662F ' + navigation.state.params.user
-    };
-}, _temp));
-
-exports.default = ProfileScreen;
-
-
-var styles = _reactNative.StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'white',
-        top: 64
     },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10
+
+    centering: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    outerContainer: {
+        flex: 1
+    },
+    containerAvoid: {
+        flex: 1,
+        justifyContent: 'center',
+        paddingHorizontal: 20,
+        paddingTop: 20
+    },
+    textInput: {
+        borderRadius: 5,
+        borderWidth: 1,
+        height: 44,
+        paddingHorizontal: 10
+    },
+    segment: {
+        marginBottom: 10
+    },
+    closeButton: {
+        position: 'absolute',
+        top: 30,
+        left: 10
     }
 });
-}, 559, null, "MyFirstReactNativeAPP/src/screens/comman/ProfileScreen.js");
+}, 565, null, "MyFirstReactNativeAPP/src/screens/comman/HomeScreen.js");
 __d(/* MyFirstReactNativeAPP/src/screens/comman/NameEditScreen.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -68446,6 +68356,418 @@ var FadeInView = _wrapComponent('FadeInView')(function (_React$Component) {
 
 exports.default = FadeInView;
 }, 561, null, "MyFirstReactNativeAPP/src/components/comman/FadeInView.js");
+__d(/* MyFirstReactNativeAPP/src/nativecomponents/ios/MapView.js */function(global, require, module, exports) {var _reactNative = require(12            ); // 12 = react-native
+
+module.exports = (0, _reactNative.requireNativeComponent)('RNTMap', null);
+}, 563, null, "MyFirstReactNativeAPP/src/nativecomponents/ios/MapView.js");
+__d(/* MyFirstReactNativeAPP/src/screens/comman/ProductScreen.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react2 = require(36     ); // 36 = react
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index = require(160                                                       ); // 160 = ./../../../node_modules/react-transform-hmr/lib/index.js
+
+var _index2 = _interopRequireDefault(_index);
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _class,
+    _temp,
+    _jsxFileName = '/Users/Ivan/WebstormProjects/MyFirstReactNativeAPP/src/screens/comman/ProductScreen.js';
+
+var _propTypes = require(127         ); // 127 = prop-types
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactNative = require(12            ); // 12 = react-native
+
+var _NameEditScreen = require(560               ); // 560 = ./NameEditScreen
+
+var _NameEditScreen2 = _interopRequireDefault(_NameEditScreen);
+
+var _MapView = require(563                                 ); // 563 = ../../nativecomponents/ios/MapView
+
+var _MapView2 = _interopRequireDefault(_MapView);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _components = {
+    AgeScreen: {
+        displayName: 'AgeScreen'
+    }
+};
+
+var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
+    filename: '/Users/Ivan/WebstormProjects/MyFirstReactNativeAPP/src/screens/comman/ProductScreen.js',
+    components: _components,
+    locals: [module],
+    imports: [_react3.default]
+});
+
+function _wrapComponent(id) {
+    return function (Component) {
+        return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+    };
+}
+
+var AgeScreen = _wrapComponent('AgeScreen')((_temp = _class = function (_React$Component) {
+    _inherits(AgeScreen, _React$Component);
+
+    function AgeScreen(props, context) {
+        _classCallCheck(this, AgeScreen);
+
+        var _this = _possibleConstructorReturn(this, (AgeScreen.__proto__ || Object.getPrototypeOf(AgeScreen)).call(this, props, context));
+
+        _this.onSegmentChange = function (segment) {
+            _this.setState({ behavior: segment.toLowerCase() });
+        };
+
+        _this._onForward = _this._onForward.bind(_this);
+        _this._onDateChange = _this._onDateChange.bind(_this);
+
+        _this.state = {
+
+            date: new Date(),
+            timeZoneOffsetInHours: -1 * new Date().getTimezoneOffset() / 60,
+            name: '我是年龄编辑',
+            subname: '点击编辑姓名',
+
+            behavior: 'padding',
+            switchValue: false
+        };
+        return _this;
+    }
+
+    _createClass(AgeScreen, [{
+        key: '_onForward',
+        value: function _onForward() {
+
+            this.props.navigator.push({
+                component: _NameEditScreen2.default,
+                title: '姓名编辑',
+                passProps: { user: '爆seed' },
+                barTintColor: 'red'
+            });
+        }
+    }, {
+        key: '_onDateChange',
+        value: function _onDateChange(date) {
+
+            this.setState({
+
+                date: date,
+                name: date.getMinutes(),
+                subname: date.getHours()
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            var progressBar = _react3.default.createElement(
+                _reactNative.View,
+                { style: styles.container, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 93
+                    }
+                },
+                _react3.default.createElement(_reactNative.ProgressBarAndroid, { styleAttr: 'Inverse', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 94
+                    }
+                })
+            );
+
+            return _react3.default.createElement(
+                _reactNative.View,
+                { style: styles.container, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 100
+                    }
+                },
+                _react3.default.createElement(_reactNative.DatePickerIOS, {
+                    date: this.state.date,
+                    mode: 'datetime',
+                    timeZoneOffsetInMinutes: this.state.timeZoneOffsetInHours * 60,
+                    onDateChange: this._onDateChange,
+                    minuteInterval: 10,
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 102
+                    }
+                })
+            );
+        }
+    }]);
+
+    return AgeScreen;
+}(_react3.default.Component), _class.propTypes = {
+
+    route: _propTypes2.default.shape({
+        title: _propTypes2.default.string.isRequired
+    }),
+
+    navigator: _propTypes2.default.object.isRequired
+}, _temp));
+
+exports.default = AgeScreen;
+
+
+var styles = _reactNative.StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'white',
+        top: 64
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10
+    },
+
+    centering: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    outerContainer: {
+        flex: 1
+    },
+    containerAvoid: {
+        flex: 1,
+        justifyContent: 'center',
+        paddingHorizontal: 20,
+        paddingTop: 20
+    },
+    textInput: {
+        borderRadius: 5,
+        borderWidth: 1,
+        height: 44,
+        paddingHorizontal: 10
+    },
+    segment: {
+        marginBottom: 10
+    },
+    closeButton: {
+        position: 'absolute',
+        top: 30,
+        left: 10
+    }
+});
+}, 566, null, "MyFirstReactNativeAPP/src/screens/comman/ProductScreen.js");
+__d(/* MyFirstReactNativeAPP/src/screens/comman/MineScreen.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react2 = require(36     ); // 36 = react
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index = require(160                                                       ); // 160 = ./../../../node_modules/react-transform-hmr/lib/index.js
+
+var _index2 = _interopRequireDefault(_index);
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _class,
+    _temp,
+    _jsxFileName = '/Users/Ivan/WebstormProjects/MyFirstReactNativeAPP/src/screens/comman/MineScreen.js';
+
+var _propTypes = require(127         ); // 127 = prop-types
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactNative = require(12            ); // 12 = react-native
+
+var _NameEditScreen = require(560               ); // 560 = ./NameEditScreen
+
+var _NameEditScreen2 = _interopRequireDefault(_NameEditScreen);
+
+var _MapView = require(563                                 ); // 563 = ../../nativecomponents/ios/MapView
+
+var _MapView2 = _interopRequireDefault(_MapView);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _components = {
+    AgeScreen: {
+        displayName: 'AgeScreen'
+    }
+};
+
+var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
+    filename: '/Users/Ivan/WebstormProjects/MyFirstReactNativeAPP/src/screens/comman/MineScreen.js',
+    components: _components,
+    locals: [module],
+    imports: [_react3.default]
+});
+
+function _wrapComponent(id) {
+    return function (Component) {
+        return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+    };
+}
+
+var AgeScreen = _wrapComponent('AgeScreen')((_temp = _class = function (_React$Component) {
+    _inherits(AgeScreen, _React$Component);
+
+    function AgeScreen(props, context) {
+        _classCallCheck(this, AgeScreen);
+
+        var _this = _possibleConstructorReturn(this, (AgeScreen.__proto__ || Object.getPrototypeOf(AgeScreen)).call(this, props, context));
+
+        _this.onSegmentChange = function (segment) {
+            _this.setState({ behavior: segment.toLowerCase() });
+        };
+
+        _this._onForward = _this._onForward.bind(_this);
+        _this._onDateChange = _this._onDateChange.bind(_this);
+
+        _this.state = {
+
+            date: new Date(),
+            timeZoneOffsetInHours: -1 * new Date().getTimezoneOffset() / 60,
+            name: '我是年龄编辑',
+            subname: '点击编辑姓名',
+
+            behavior: 'padding',
+            switchValue: false
+        };
+        return _this;
+    }
+
+    _createClass(AgeScreen, [{
+        key: '_onForward',
+        value: function _onForward() {
+
+            this.props.navigator.push({
+                component: _NameEditScreen2.default,
+                title: '姓名编辑',
+                passProps: { user: '爆seed' },
+                barTintColor: 'red'
+            });
+        }
+    }, {
+        key: '_onDateChange',
+        value: function _onDateChange(date) {
+
+            this.setState({
+
+                date: date,
+                name: date.getMinutes(),
+                subname: date.getHours()
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            var progressBar = _react3.default.createElement(
+                _reactNative.View,
+                { style: styles.container, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 93
+                    }
+                },
+                _react3.default.createElement(_reactNative.ProgressBarAndroid, { styleAttr: 'Inverse', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 94
+                    }
+                })
+            );
+
+            return _react3.default.createElement(
+                _reactNative.View,
+                { style: styles.container, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 99
+                    }
+                },
+                _react3.default.createElement(_reactNative.Button, {
+                    onPress: this._onForward,
+                    title: 'Learn More',
+                    color: '#841584',
+                    backgroundColor: 'red',
+                    accessibilityLabel: 'Learn more about this purple button',
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 100
+                    }
+                })
+            );
+        }
+    }]);
+
+    return AgeScreen;
+}(_react3.default.Component), _class.propTypes = {
+
+    route: _propTypes2.default.shape({
+        title: _propTypes2.default.string.isRequired
+    }),
+
+    navigator: _propTypes2.default.object.isRequired
+}, _temp));
+
+exports.default = AgeScreen;
+
+
+var styles = _reactNative.StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'white',
+        top: 64
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10
+    },
+
+    centering: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    outerContainer: {
+        flex: 1
+    },
+    containerAvoid: {
+        flex: 1,
+        justifyContent: 'center',
+        paddingHorizontal: 20,
+        paddingTop: 20
+    },
+    textInput: {
+        borderRadius: 5,
+        borderWidth: 1,
+        height: 44,
+        paddingHorizontal: 10
+    },
+    segment: {
+        marginBottom: 10
+    },
+    closeButton: {
+        position: 'absolute',
+        top: 30,
+        left: 10
+    }
+});
+}, 567, null, "MyFirstReactNativeAPP/src/screens/comman/MineScreen.js");
 __d(/* MyFirstReactNativeAPP/src/screens/comman/AgeScreen.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -68740,10 +69062,227 @@ var styles = _reactNative.StyleSheet.create({
     }
 });
 }, 562, null, "MyFirstReactNativeAPP/src/screens/comman/AgeScreen.js");
-__d(/* MyFirstReactNativeAPP/src/nativecomponents/ios/MapView.js */function(global, require, module, exports) {var _reactNative = require(12            ); // 12 = react-native
+__d(/* MyFirstReactNativeAPP/src/screens/comman/MainScreen.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
-module.exports = (0, _reactNative.requireNativeComponent)('RNTMap', null);
-}, 563, null, "MyFirstReactNativeAPP/src/nativecomponents/ios/MapView.js");
+var _react2 = require(36     ); // 36 = react
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index = require(160                                                       ); // 160 = ./../../../node_modules/react-transform-hmr/lib/index.js
+
+var _index2 = _interopRequireDefault(_index);
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _class,
+    _temp,
+    _jsxFileName = '/Users/Ivan/WebstormProjects/MyFirstReactNativeAPP/src/screens/comman/MainScreen.js';
+
+var _reactNative = require(12            ); // 12 = react-native
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _components = {
+    MainScreen: {
+        displayName: 'MainScreen'
+    }
+};
+
+var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
+    filename: '/Users/Ivan/WebstormProjects/MyFirstReactNativeAPP/src/screens/comman/MainScreen.js',
+    components: _components,
+    locals: [module],
+    imports: [_react3.default]
+});
+
+function _wrapComponent(id) {
+    return function (Component) {
+        return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+    };
+}
+
+var MainScreen = _wrapComponent('MainScreen')((_temp = _class = function (_React$Component) {
+    _inherits(MainScreen, _React$Component);
+
+    function MainScreen() {
+        _classCallCheck(this, MainScreen);
+
+        return _possibleConstructorReturn(this, (MainScreen.__proto__ || Object.getPrototypeOf(MainScreen)).apply(this, arguments));
+    }
+
+    _createClass(MainScreen, [{
+        key: 'render',
+        value: function render() {
+            var navigate = this.props.navigation.navigate;
+
+
+            return _react3.default.createElement(
+                _reactNative.View,
+                { style: styles.container, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 26
+                    }
+                },
+                _react3.default.createElement(
+                    _reactNative.Text,
+                    { style: styles.welcome, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 27
+                        }
+                    },
+                    '\u6211\u662F\u4E3B\u9875'
+                ),
+                _react3.default.createElement(_reactNative.Button, {
+                    onPress: function onPress() {
+                        return navigate('Profile', { user: '爆seed' });
+                    },
+                    title: 'Go to Profile',
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 29
+                    }
+                })
+            );
+        }
+    }]);
+
+    return MainScreen;
+}(_react3.default.Component), _class.navigationOptions = {
+
+    title: '主页'
+}, _temp));
+
+exports.default = MainScreen;
+
+
+var styles = _reactNative.StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'white',
+        top: 64
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10
+    }
+});
+}, 558, null, "MyFirstReactNativeAPP/src/screens/comman/MainScreen.js");
+__d(/* MyFirstReactNativeAPP/src/screens/comman/ProfileScreen.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react2 = require(36     ); // 36 = react
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index = require(160                                                       ); // 160 = ./../../../node_modules/react-transform-hmr/lib/index.js
+
+var _index2 = _interopRequireDefault(_index);
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _class,
+    _temp,
+    _jsxFileName = '/Users/Ivan/WebstormProjects/MyFirstReactNativeAPP/src/screens/comman/ProfileScreen.js';
+
+var _reactNative = require(12            ); // 12 = react-native
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _components = {
+    ProfileScreen: {
+        displayName: 'ProfileScreen'
+    }
+};
+
+var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
+    filename: '/Users/Ivan/WebstormProjects/MyFirstReactNativeAPP/src/screens/comman/ProfileScreen.js',
+    components: _components,
+    locals: [module],
+    imports: [_react3.default]
+});
+
+function _wrapComponent(id) {
+    return function (Component) {
+        return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+    };
+}
+
+var ProfileScreen = _wrapComponent('ProfileScreen')((_temp = _class = function (_React$Component) {
+    _inherits(ProfileScreen, _React$Component);
+
+    function ProfileScreen() {
+        _classCallCheck(this, ProfileScreen);
+
+        return _possibleConstructorReturn(this, (ProfileScreen.__proto__ || Object.getPrototypeOf(ProfileScreen)).apply(this, arguments));
+    }
+
+    _createClass(ProfileScreen, [{
+        key: 'render',
+        value: function render() {
+            var params = this.props.navigation.state.params;
+
+
+            return _react3.default.createElement(
+                _reactNative.View,
+                { style: styles.container, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 27
+                    }
+                },
+                _react3.default.createElement(
+                    _reactNative.Text,
+                    { style: styles.welcome, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 28
+                        }
+                    },
+                    '\u6211\u662F ',
+                    params.user
+                )
+            );
+        }
+    }]);
+
+    return ProfileScreen;
+}(_react3.default.Component), _class.navigationOptions = function (_ref) {
+    var navigation = _ref.navigation;
+    return {
+        title: '\u6211\u662F ' + navigation.state.params.user
+    };
+}, _temp));
+
+exports.default = ProfileScreen;
+
+
+var styles = _reactNative.StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'white',
+        top: 64
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10
+    }
+});
+}, 559, null, "MyFirstReactNativeAPP/src/screens/comman/ProfileScreen.js");
 __d(/* MyFirstReactNativeAPP/src/nativemodules/android/ToastExample.js */function(global, require, module, exports) {'use strict';
 
 var _reactNative = require(12            ); // 12 = react-native
