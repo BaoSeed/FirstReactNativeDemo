@@ -136,7 +136,19 @@ export default class App extends React.Component {
                  selected={this.state.selectedTab === 'Home'}
                  onPress={()=>{this.setState({selectedTab: 'Home',})}}
                  >
-                 <HomeScreen/>
+                 <NavigatorIOS
+                     //此项不设置,创建的导航控制器只能看见导航条而看不到界面
+                     style={{flex: 1}}
+                     barTintColor='#ffffcc'
+                     initialRoute={{
+                         component: HomeScreen,
+                         title: 'HomeScreen',
+                         leftButtonTitle:'左边',
+                         onLeftButtonPress:() => {alert('左边')},
+                         rightButtonTitle:'右边',
+                         onRightButtonPress:() => {alert('右边')}
+                     }}
+                 />
              </TabBarIOS.Item>
 
              <TabBarIOS.Item
@@ -145,7 +157,19 @@ export default class App extends React.Component {
                  selected={this.state.selectedTab === 'Product'}
                  onPress={()=>{this.setState({selectedTab:'Product'})}}
                  >
-                 <ProductScreen/>
+                 <NavigatorIOS
+                     //此项不设置,创建的导航控制器只能看见导航条而看不到界面
+                     style={{flex: 1}}
+                     barTintColor='#ffffcc'
+                     initialRoute={{
+                         component: ProductScreen,
+                         title: 'ProductScreen',
+                         leftButtonTitle:'左边',
+                         onLeftButtonPress:() => {alert('左边')},
+                         rightButtonTitle:'右边',
+                         onRightButtonPress:() => {alert('右边')}
+                     }}
+                 />
              </TabBarIOS.Item>
 
              <TabBarIOS.Item
@@ -154,7 +178,19 @@ export default class App extends React.Component {
                  selected={this.state.selectedTab === 'Mine'}
                  onPress={()=>{this.setState({selectedTab: 'Mine',})}}
                  >
-                 <MineScreen/>
+                 <NavigatorIOS
+                     //此项不设置,创建的导航控制器只能看见导航条而看不到界面
+                     style={{flex: 1}}
+                     barTintColor='#ffffcc'
+                     initialRoute={{
+                         component: MineScreen,
+                         title: 'MineScreen',
+                         leftButtonTitle:'左边',
+                         onLeftButtonPress:() => {alert('左边')},
+                         rightButtonTitle:'右边',
+                         onRightButtonPress:() => {alert('右边')}
+                     }}
+                 />
              </TabBarIOS.Item>
 
          </TabBarIOS>

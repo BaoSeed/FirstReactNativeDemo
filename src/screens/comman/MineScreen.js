@@ -79,7 +79,6 @@ export default class  AgeScreen extends  React.Component {
     _onDateChange(date){
 
         this.setState({
-
             date:date,
             name:date.getMinutes(),
             subname:date.getHours()
@@ -104,7 +103,6 @@ export default class  AgeScreen extends  React.Component {
                     backgroundColor='red'
                     accessibilityLabel="Learn more about this purple button"
                 />
-
             </View>
         );
     }

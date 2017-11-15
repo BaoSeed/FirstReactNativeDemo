@@ -58525,7 +58525,21 @@ var App = _wrapComponent('App')(function (_React$Component) {
                             lineNumber: 133
                         }
                     },
-                    _react3.default.createElement(_HomeScreen2.default, {
+                    _react3.default.createElement(_reactNative.NavigatorIOS, {
+                        style: { flex: 1 },
+                        barTintColor: '#ffffcc',
+                        initialRoute: {
+                            component: _HomeScreen2.default,
+                            title: 'HomeScreen',
+                            leftButtonTitle: '左边',
+                            onLeftButtonPress: function onLeftButtonPress() {
+                                alert('左边');
+                            },
+                            rightButtonTitle: '右边',
+                            onRightButtonPress: function onRightButtonPress() {
+                                alert('右边');
+                            }
+                        },
                         __source: {
                             fileName: _jsxFileName,
                             lineNumber: 139
@@ -58543,13 +58557,27 @@ var App = _wrapComponent('App')(function (_React$Component) {
                         },
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 142
+                            lineNumber: 154
                         }
                     },
-                    _react3.default.createElement(_ProductScreen2.default, {
+                    _react3.default.createElement(_reactNative.NavigatorIOS, {
+                        style: { flex: 1 },
+                        barTintColor: '#ffffcc',
+                        initialRoute: {
+                            component: _ProductScreen2.default,
+                            title: 'ProductScreen',
+                            leftButtonTitle: '左边',
+                            onLeftButtonPress: function onLeftButtonPress() {
+                                alert('左边');
+                            },
+                            rightButtonTitle: '右边',
+                            onRightButtonPress: function onRightButtonPress() {
+                                alert('右边');
+                            }
+                        },
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 148
+                            lineNumber: 160
                         }
                     })
                 ),
@@ -58564,13 +58592,27 @@ var App = _wrapComponent('App')(function (_React$Component) {
                         },
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 151
+                            lineNumber: 175
                         }
                     },
-                    _react3.default.createElement(_MineScreen2.default, {
+                    _react3.default.createElement(_reactNative.NavigatorIOS, {
+                        style: { flex: 1 },
+                        barTintColor: '#ffffcc',
+                        initialRoute: {
+                            component: _MineScreen2.default,
+                            title: 'MineScreen',
+                            leftButtonTitle: '左边',
+                            onLeftButtonPress: function onLeftButtonPress() {
+                                alert('左边');
+                            },
+                            rightButtonTitle: '右边',
+                            onRightButtonPress: function onRightButtonPress() {
+                                alert('右边');
+                            }
+                        },
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 157
+                            lineNumber: 181
                         }
                     })
                 )
@@ -68667,7 +68709,6 @@ var AgeScreen = _wrapComponent('AgeScreen')((_temp = _class = function (_React$C
         value: function _onDateChange(date) {
 
             this.setState({
-
                 date: date,
                 name: date.getMinutes(),
                 subname: date.getHours()
@@ -68681,12 +68722,12 @@ var AgeScreen = _wrapComponent('AgeScreen')((_temp = _class = function (_React$C
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 93
+                        lineNumber: 92
                     }
                 },
                 _react3.default.createElement(_reactNative.ProgressBarAndroid, { styleAttr: 'Inverse', __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 94
+                        lineNumber: 93
                     }
                 })
             );
@@ -68695,7 +68736,7 @@ var AgeScreen = _wrapComponent('AgeScreen')((_temp = _class = function (_React$C
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 99
+                        lineNumber: 98
                     }
                 },
                 _react3.default.createElement(_reactNative.Button, {
@@ -68706,7 +68747,7 @@ var AgeScreen = _wrapComponent('AgeScreen')((_temp = _class = function (_React$C
                     accessibilityLabel: 'Learn more about this purple button',
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 100
+                        lineNumber: 99
                     }
                 })
             );
