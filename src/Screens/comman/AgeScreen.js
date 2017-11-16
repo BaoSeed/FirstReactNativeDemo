@@ -37,23 +37,19 @@ export default class  AgeScreen extends  React.Component {
         }),
 
         navigator: PropTypes.object.isRequired,
-    }
+    };
 
 
     constructor(props, context) {
         super(props, context);
-
         //私有方法绑定this
         this._onForward = this._onForward.bind(this);
         this._onDateChange = this._onDateChange.bind(this);
-
         this.state = {
-
             date: new Date(),
             timeZoneOffsetInHours: (-1) * (new Date()).getTimezoneOffset() / 60,
             name:'我是年龄编辑',
             subname:'点击编辑姓名',
-
             behavior: 'padding',
             switchValue:false,
         };
@@ -75,27 +71,20 @@ export default class  AgeScreen extends  React.Component {
         });
     }
 
-
     _onDateChange(date){
-
         this.setState({
-
             date:date,
             name:date.getMinutes(),
             subname:date.getHours()
         });
     }
 
-
     render() {
-
         var progressBar =
             <View style={styles.container}>
                 <ProgressBarAndroid styleAttr="Inverse" />
             </View>;
-
         return (
-
                 <KeyboardAvoidingView
                     behavior={this.state.behavior}
                     style={styles.containerAvoid}>
@@ -149,7 +138,6 @@ export default class  AgeScreen extends  React.Component {
                             });
                         }}
                     />
-
                 <DatePickerIOS
                     date={this.state.date}
                     mode="datetime"
@@ -158,12 +146,10 @@ export default class  AgeScreen extends  React.Component {
                     minuteInterval={10}
                 />
                 </KeyboardAvoidingView>
-
         );
     }
 }
 
-//<MapView style={{ flex: 1 }} />
 
 const styles = StyleSheet.create({
     container: {

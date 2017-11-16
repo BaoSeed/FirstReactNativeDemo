@@ -7,47 +7,29 @@ import {
     TouchableHighlight ,
     TouchableOpacity,
     NativeModules,
-    LayoutAnimation
+    LayoutAnimation,
 
 } from 'react-native';
 
 
 import FadeInView  from '../../components/comman/FadeInView';
-
 //这么写，渲染不出来
 //var FadeInView = require('../../components/comman/FadeInView');
-
 //这么写不行啊，路径问题
 //var {FadeInView} = require('/main.js');
 
 
 const { UIManager } = NativeModules;
-
 UIManager.setLayoutAnimationEnabledExperimental &&
 UIManager.setLayoutAnimationEnabledExperimental(true);
 
 export default class  NameEditScreen extends  React.Component{
-
 
     constructor(props, context) {
         super(props, context);
 
         this._onBack = this._onBack.bind(this);
     }
-
-    /*
-    var MyButton  = React.createClass({
-
-        render() {
-            return (
-                <View>
-                    <Text>{this.props.label}</Text>
-                </View>
-            )
-        },
-
-    });
-    */
 
     state = {
         w: 100,
@@ -57,7 +39,6 @@ export default class  NameEditScreen extends  React.Component{
 
     //私有方法
     _onBack(){
-
         this.props.navigator.pop();
     }
 
@@ -70,37 +51,25 @@ export default class  NameEditScreen extends  React.Component{
         this.setState({w: this.state.w + 15, h: this.state.h + 15})
     }
 
-
     render(){
-
        const {user} = this.props;
-
         return(
-
             <View style={styles.container}>
                 <Text style={styles.welcome}>我是-{user}</Text>
-
                 <TouchableHighlight
                     onPress={this._onBack}>
                     <Text style={styles.welcome} >点击我返回</Text>
                 </TouchableHighlight>
-
                 <FadeInView style={{width:200,height: 50, backgroundColor: 'powderblue'}}>
                     <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>Fading in</Text>
                 </FadeInView>
-
-
                 <View style={[styles.box, {width: this.state.w, height: this.state.h}]} />
-
                 <TouchableOpacity onPress={this._onPress}>
                     <View style={styles.button}>
                         <Text style={styles.buttonText}>Press me!</Text>
                     </View>
                 </TouchableOpacity>
-
-
             </View>
-
         );
     }
 }

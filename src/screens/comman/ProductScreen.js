@@ -2,155 +2,211 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-    AppRegistry,
     StyleSheet,
-    Text,
     View,
-    TouchableHighlight ,
+    Text,
+    TouchableHighlight,
+    FlatList,
+    Navigator,
     NavigatorIOS,
-    ActivityIndicator,
-    Button,
-    CheckBox,
-    DatePickerIOS,
-    KeyboardAvoidingView,
-    SegmentedControlIOS,
-    TextInput,
-    ProgressBarAndroid,
-    Switch,
-
 } from 'react-native';
 
+import ProductDetailScreen  from './ProductDetailScreen';
+import ProductListCell      from '../../components/comman/ProductListCell';
 
+export default class  ProductScreen extends  React.Component {
 
-import NameEditScreen from './NameEditScreen';
-import MapView        from '../../nativecomponents/ios/MapView';
-
-
-export default class  AgeScreen extends  React.Component {
-
-
-    //这个作用是什么？？？？
-    static propTypes = {
-
-        route: PropTypes.shape({
-            title: PropTypes.string.isRequired
-        }),
-
-        navigator: PropTypes.object.isRequired,
+    /*
+    constructor(props) {
+        super(props);
+        this.state = {refreshing:false,data:this._flatListData};
     }
+    */
 
+    _flatListData =
+        [
+            {title: 'Devin'},
+            {title: 'Jackson'},
+            {title: 'James'},
+            {title: 'Joel'},
+            {title: 'John'},
+            {title: 'Jillian'},
+            {title: 'Jimmy'},
+            {title: 'Julie'},
+        ];
 
-    constructor(props, context) {
-        super(props, context);
+    state={refreshing:false,data:this._flatListData}
 
-        //私有方法绑定this
-        this._onForward = this._onForward.bind(this);
-        this._onDateChange = this._onDateChange.bind(this);
+    _keyExtractor = (item, index) => index;
 
-        this.state = {
-
-            date: new Date(),
-            timeZoneOffsetInHours: (-1) * (new Date()).getTimezoneOffset() / 60,
-            name:'我是年龄编辑',
-            subname:'点击编辑姓名',
-
-            behavior: 'padding',
-            switchValue:false,
-        };
-    }
-
-
-    onSegmentChange = (segment: String) => {
-        this.setState({behavior: segment.toLowerCase()});
-    };
-
-    //私有方法
-    _onForward(){
+    _onPressItem = (item,index)=>{
 
         this.props.navigator.push({
-            component:NameEditScreen,
+            component:ProductDetailScreen,
             title:'姓名编辑',
-            passProps:{user:'爆seed'},
+            passProps:{index:index},
             barTintColor:'red'
         });
-    }
+    };
 
+    _onPress = (item,index)=>{
 
-    _onDateChange(date){
-
-        this.setState({
-
-            date:date,
-            name:date.getMinutes(),
-            subname:date.getHours()
+        this.props.navigator.push({
+            component:ProductDetailScreen,
+            title:'姓名编辑',
+            passProps:{index:index},
+            barTintColor:'red'
         });
-    }
+    };
 
+    _renderItem = ({item,index}) => {
+
+        return (
+        /*
+        <ProductListCell
+            id={item.id}
+            onPressItem={this._onPressItem}
+            title={item.title}
+        />
+        */
+
+        <View style={{flex: 1}}>
+            <TouchableHighlight
+                onPress={this._onPress(item,index)}>
+                <Text style={{fontWeight: 'bold', fontSize: 20, height: 50}}>我是你</Text>
+            </TouchableHighlight>
+        </View>
+        );
+    };
+
+    _header = ()=>(
+        <View style={{flex:1}}>
+        <Text style={{fontWeight:'bold',fontSize:20,height:50}}>热门电影</Text>
+        </View>
+     );
+
+    _footer = () => (
+
+        <Text style={{fontSize: 14, alignSelf: 'center'}}>到底啦，没有啦！</Text>
+    );
+
+    _createEmptyView=()=> (
+
+       <Text style={{fontSize: 40, alignSelf: 'center'}}>还没有数据哦！</Text>
+    );
+
+    _ItemDivideComponent=()=>(
+
+        <View style={{height: 1, backgroundColor: 'skyblue'}}/>
+    );
 
     render() {
 
-        var progressBar =
-            <View style={styles.container}>
-                <ProgressBarAndroid styleAttr="Inverse" />
-            </View>;
-
         return (
+                <View style={{flex:1}}>
+                <FlatList
+                    data={this.state.data}
+                    extraData={this.state}
+                    renderItem={this._renderItem}
+                    keyExtractor={this._keyExtractor}
+                    refreshing={this.state.refreshing}
+                    ItemSeparatorComponent={this._ItemDivideComponent}
+                    ListEmptyComponent={this._createEmptyView()}
+                    ListFooterComponent={this._footer}
+                    ListHeaderComponent={this._header}
+                    getItemLayout={(data, index) => ( {length: 44, offset: (44 + 1) * index, index} )}
+                    onRefresh={()=>{
+                        this.setState({refreshing: true});
+                        setTimeout(()=>{
+                            this.setState({refreshing: false});
+                        },1000);
+                    }}
+                    onEndReachedThreshold={0.1}
+                    onEndReached={({distanceFromEnd}) => (
+                        setTimeout(() => {
+                            this.setState((state) => ({
 
-
-            <View style={styles.container}>
-
-                <DatePickerIOS
-                    date={this.state.date}
-                    mode="datetime"
-                    timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
-                    onDateChange={this._onDateChange}
-                    minuteInterval={10}
+                            }));
+                        }, 3000)
+                    )}
                 />
-            </View>
+                </View>
+            /*
+            <View style={styles.SectionListcontainer}>
+            <SectionList
+            sections={[
+            {title: 'D', data: ['Devin']},
+            {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
+             ]}
+             renderItem={({item}) => <Text style={styles.SectionListitem}> {item} </Text>}
+            renderSectionHeader={({section}) => <Text style={styles.sectionHeader}> {section.title} </Text>}
+             />
+           </View>
+           */
         );
     }
 }
 
-//<MapView style={{ flex: 1 }} />
 
 const styles = StyleSheet.create({
+
     container: {
         flex: 1,
-        backgroundColor: 'white',
-        top:64,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
     },
     welcome: {
         fontSize: 20,
-        textAlign: 'center',
+        textAlign: 'left',
         margin: 10,
     },
-
-    centering: {
-        alignItems: 'center',
-        justifyContent: 'center',
+    instructions: {
+        textAlign: 'center',
+        color: '#333333',
+        marginBottom: 5,
     },
-
-    outerContainer: {
+    FlatContainer: {
         flex: 1,
+        top:16,
+        paddingTop:0,
+        backgroundColor:'white'
     },
-    containerAvoid: {
-        flex: 1,
-        justifyContent: 'center',
-        paddingHorizontal: 20,
-        paddingTop: 20,
-    },
-    textInput: {
-        borderRadius: 5,
-        borderWidth: 1,
+    FlatItem: {
+        fontSize: 18,
         height: 44,
-        paddingHorizontal: 10,
+        marginLeft:20
     },
-    segment: {
-        marginBottom: 10,
+    SectionListcontainer: {
+        flex: 1,
+        paddingTop: 22
     },
-    closeButton: {
-        position: 'absolute',
-        top: 30,
-        left: 10,
-    }
+    sectionHeader: {
+        paddingTop: 2,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingBottom: 2,
+        fontSize: 14,
+        fontWeight: 'bold',
+        backgroundColor: 'rgba(247,247,247,1.0)',
+    },
+    SectionListitem: {
+        padding: 10,
+        fontSize: 18,
+        height: 44,
+    },
 });
+
+
+/*
+fetch('https://facebook.github.io/react-native/movies.json')
+    .then((response)=>response.json())
+    .then((responseJson)=>{
+
+        return responseJson.movies;
+    })
+    .catch((error)=>{
+
+        console.error(error);
+    })
+ */

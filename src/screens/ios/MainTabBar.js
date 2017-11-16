@@ -2,13 +2,8 @@
 import React from 'react';
 
 import {
-    Platform,
-    StyleSheet,
-    Text,
-    View,
     TabBarIOS,
-    NavigatorIOS,
-    Navigator,
+    NavigatorIOS
 } from 'react-native';
 
 

@@ -26,39 +26,32 @@ import NameEditScreen from './NameEditScreen';
 import MapView        from '../../nativecomponents/ios/MapView';
 
 
-export default class  AgeScreen extends  React.Component {
+export default class  HomeScreen extends  React.Component {
 
 
     //这个作用是什么？？？？
     static propTypes = {
-
         route: PropTypes.shape({
             title: PropTypes.string.isRequired
         }),
-
         navigator: PropTypes.object.isRequired,
-    }
+    };
 
 
     constructor(props, context) {
         super(props, context);
-
         //私有方法绑定this
         this._onForward = this._onForward.bind(this);
         this._onDateChange = this._onDateChange.bind(this);
-
         this.state = {
-
             date: new Date(),
             timeZoneOffsetInHours: (-1) * (new Date()).getTimezoneOffset() / 60,
             name:'我是年龄编辑',
             subname:'点击编辑姓名',
-
             behavior: 'padding',
             switchValue:false,
         };
     }
-
 
     onSegmentChange = (segment: String) => {
         this.setState({behavior: segment.toLowerCase()});
@@ -75,24 +68,15 @@ export default class  AgeScreen extends  React.Component {
         });
     }
 
-
     _onDateChange(date){
-
         this.setState({
-
             date:date,
             name:date.getMinutes(),
             subname:date.getHours()
         });
     }
 
-
     render() {
-
-        var progressBar =
-            <View style={styles.container}>
-                <ProgressBarAndroid styleAttr="Inverse" />
-            </View>;
 
         return (
 

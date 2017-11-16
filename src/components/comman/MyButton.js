@@ -10,6 +10,9 @@ import {
 } from 'react-native';
 
 
+//<Button ref="confirmBtn" text="Go to Jane`s profile" bgColor="red"  object:{{a:'b'}} handler={this.fetchData()} />
+
+
 //export default是一个可以导出的组件
 export default class MyButton extends React.Component {
 
@@ -31,26 +34,15 @@ export default class MyButton extends React.Component {
     };
 
     enable = ()=>{
-
         this.setState({
-
            disable:false,
         });
     };
 
     disable = ()=>{
-
       this.setState({
-
           disable:true,
       });
-
-      //this.setState(previousState => {
-
-         //return {show}
-
-     //});
-
     };
 
     render() {
