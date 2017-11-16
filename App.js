@@ -30,17 +30,15 @@ import { StackNavigator}from 'react-navigation'
 
 //导入同级目录下的src文件夹..
 import MyButton       from './src/components/comman/MyButton';
+import ToastExample   from './src/nativemodules/android/ToastExample';
+import MainTabBar     from './src/screens/ios/MainTabBar';
 import HomeScreen     from './src/screens/comman/HomeScreen';
 import ProductScreen  from './src/screens/comman/ProductScreen';
 import MineScreen     from './src/screens/comman/MineScreen';
-
 import AgeScreen      from './src/screens/comman/AgeScreen';
 import NameEditScreen from './src/screens/comman/NameEditScreen';
 import MainScreen     from './src/screens/comman/MainScreen';
 import ProfileScreen  from './src/screens/comman/ProfileScreen';
-
-import ToastExample   from './src/nativemodules/android/ToastExample';
-
 
 
 const instructions = Platform.select({
@@ -75,10 +73,7 @@ export default class App extends React.Component {
         this.state = {
             status:1,
             modalVisible: false,
-            selectedTab:'Home'
         };
-
-        this._renderContent = this._renderContent.bind(this);
     }
 
     setModalVisible(visible) {
@@ -114,86 +109,9 @@ export default class App extends React.Component {
     }
 
 
-    _renderContent(pageText,color) {
-        return (
-            <View style={[styles.container, {backgroundColor: color}]}>
-                <Text style={styles.welcome}>{pageText}</Text>
-            </View>
-        );
-    }
-
     render() {
      return (
-
-         <TabBarIOS
-             unselectedTintColor='gray'
-             tintColor='aqua'
-             barTintColor='white'>
-
-             <TabBarIOS.Item
-                 title='Home'
-                 systemIcon='bookmarks'
-                 selected={this.state.selectedTab === 'Home'}
-                 onPress={()=>{this.setState({selectedTab: 'Home',})}}
-                 >
-                 <NavigatorIOS
-                     //此项不设置,创建的导航控制器只能看见导航条而看不到界面
-                     style={{flex: 1}}
-                     barTintColor='#ffffcc'
-                     initialRoute={{
-                         component: HomeScreen,
-                         title: 'HomeScreen',
-                         leftButtonTitle:'左边',
-                         onLeftButtonPress:() => {alert('左边')},
-                         rightButtonTitle:'右边',
-                         onRightButtonPress:() => {alert('右边')}
-                     }}
-                 />
-             </TabBarIOS.Item>
-
-             <TabBarIOS.Item
-                 systemIcon='history'
-                 badge='1'
-                 selected={this.state.selectedTab === 'Product'}
-                 onPress={()=>{this.setState({selectedTab:'Product'})}}
-                 >
-                 <NavigatorIOS
-                     //此项不设置,创建的导航控制器只能看见导航条而看不到界面
-                     style={{flex: 1}}
-                     barTintColor='#ffffcc'
-                     initialRoute={{
-                         component: ProductScreen,
-                         title: 'ProductScreen',
-                         leftButtonTitle:'左边',
-                         onLeftButtonPress:() => {alert('左边')},
-                         rightButtonTitle:'右边',
-                         onRightButtonPress:() => {alert('右边')}
-                     }}
-                 />
-             </TabBarIOS.Item>
-
-             <TabBarIOS.Item
-                 systemIcon='more'
-                 title='Mine'
-                 selected={this.state.selectedTab === 'Mine'}
-                 onPress={()=>{this.setState({selectedTab: 'Mine',})}}
-                 >
-                 <NavigatorIOS
-                     //此项不设置,创建的导航控制器只能看见导航条而看不到界面
-                     style={{flex: 1}}
-                     barTintColor='#ffffcc'
-                     initialRoute={{
-                         component: MineScreen,
-                         title: 'MineScreen',
-                         leftButtonTitle:'左边',
-                         onLeftButtonPress:() => {alert('左边')},
-                         rightButtonTitle:'右边',
-                         onRightButtonPress:() => {alert('右边')}
-                     }}
-                 />
-             </TabBarIOS.Item>
-
-         </TabBarIOS>
+         <MainTabBar/>
       );
      }
 }
