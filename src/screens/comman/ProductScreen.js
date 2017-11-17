@@ -7,7 +7,6 @@ import {
     Text,
     TouchableHighlight,
     FlatList,
-    Navigator,
     NavigatorIOS,
 } from 'react-native';
 
@@ -16,12 +15,15 @@ import ProductListCell      from '../../components/comman/ProductListCell';
 
 export default class  ProductScreen extends  React.Component {
 
-    /*
+
     constructor(props) {
         super(props);
-        this.state = {refreshing:false,data:this._flatListData};
+
+        this.state = {
+            data:this._flatListData,
+            refreshing:false,
+        };
     }
-    */
 
     _flatListData =
         [
@@ -35,68 +37,49 @@ export default class  ProductScreen extends  React.Component {
             {title: 'Julie'},
         ];
 
-    state={refreshing:false,data:this._flatListData}
-
     _keyExtractor = (item, index) => index;
 
     _onPressItem = (item,index)=>{
 
         this.props.navigator.push({
             component:ProductDetailScreen,
-            title:'姓名编辑',
+            title:'产品详情',
             passProps:{index:index},
             barTintColor:'red'
         });
     };
 
-    _onPress = (item,index)=>{
+    _renderItem=({item,index})=> (
 
-        this.props.navigator.push({
-            component:ProductDetailScreen,
-            title:'姓名编辑',
-            passProps:{index:index},
-            barTintColor:'red'
-        });
-    };
-
-    _renderItem = ({item,index}) => {
-
-        return (
-        /*
         <ProductListCell
-            id={item.id}
             onPressItem={this._onPressItem}
-            title={item.title}
-        />
-        */
+            item={item}
+            index={index}
+            title={item.title}/>
+    );
 
-        <View style={{flex: 1}}>
-            <TouchableHighlight
-                onPress={this._onPress(item,index)}>
-                <Text style={{fontWeight: 'bold', fontSize: 20, height: 50}}>我是你</Text>
-            </TouchableHighlight>
-        </View>
-        );
+    //点击按钮跳转到指定行
+    onButtonPress() {
+        //viewPosition参数：0表示顶部，0.5表示中部，1表示底部
+        this._flatList.scrollToIndex({viewPosition: 0, index: this.state.text});
+        //this._flatList.scrollToOffset({ animated: true, offset: 2000 });
     };
 
-    _header = ()=>(
+    _header=()=>(
         <View style={{flex:1}}>
         <Text style={{fontWeight:'bold',fontSize:20,height:50}}>热门电影</Text>
         </View>
      );
 
-    _footer = () => (
-
+    _footer=()=>(
         <Text style={{fontSize: 14, alignSelf: 'center'}}>到底啦，没有啦！</Text>
     );
 
     _createEmptyView=()=> (
-
        <Text style={{fontSize: 40, alignSelf: 'center'}}>还没有数据哦！</Text>
     );
 
     _ItemDivideComponent=()=>(
-
         <View style={{height: 1, backgroundColor: 'skyblue'}}/>
     );
 
@@ -106,12 +89,14 @@ export default class  ProductScreen extends  React.Component {
                 <View style={{flex:1}}>
                 <FlatList
                     data={this.state.data}
+                    //使用 ref 可以获取到相应的组件
+                    ref={(flatList) => this._flatList = flatList}
                     extraData={this.state}
                     renderItem={this._renderItem}
                     keyExtractor={this._keyExtractor}
                     refreshing={this.state.refreshing}
                     ItemSeparatorComponent={this._ItemDivideComponent}
-                    ListEmptyComponent={this._createEmptyView()}
+                    ListEmptyComponent={this._createEmptyView}
                     ListFooterComponent={this._footer}
                     ListHeaderComponent={this._header}
                     getItemLayout={(data, index) => ( {length: 44, offset: (44 + 1) * index, index} )}
@@ -124,9 +109,7 @@ export default class  ProductScreen extends  React.Component {
                     onEndReachedThreshold={0.1}
                     onEndReached={({distanceFromEnd}) => (
                         setTimeout(() => {
-                            this.setState((state) => ({
-
-                            }));
+                            this.setState((state) => ({}));
                         }, 3000)
                     )}
                 />

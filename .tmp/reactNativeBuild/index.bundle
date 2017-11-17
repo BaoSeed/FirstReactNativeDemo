@@ -68447,114 +68447,106 @@ function _wrapComponent(id) {
 var ProductScreen = _wrapComponent('ProductScreen')(function (_React$Component) {
     _inherits(ProductScreen, _React$Component);
 
-    function ProductScreen() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
+    function ProductScreen(props) {
         _classCallCheck(this, ProductScreen);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
+        var _this = _possibleConstructorReturn(this, (ProductScreen.__proto__ || Object.getPrototypeOf(ProductScreen)).call(this, props));
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ProductScreen.__proto__ || Object.getPrototypeOf(ProductScreen)).call.apply(_ref, [this].concat(args))), _this), _this._flatListData = [{ title: 'Devin' }, { title: 'Jackson' }, { title: 'James' }, { title: 'Joel' }, { title: 'John' }, { title: 'Jillian' }, { title: 'Jimmy' }, { title: 'Julie' }], _this.state = { refreshing: false, data: _this._flatListData }, _this._keyExtractor = function (item, index) {
+        _this._flatListData = [{ title: 'Devin' }, { title: 'Jackson' }, { title: 'James' }, { title: 'Joel' }, { title: 'John' }, { title: 'Jillian' }, { title: 'Jimmy' }, { title: 'Julie' }];
+
+        _this._keyExtractor = function (item, index) {
             return index;
-        }, _this._onPressItem = function (item, index) {
+        };
+
+        _this._onPressItem = function (item, index) {
 
             _this.props.navigator.push({
                 component: _ProductDetailScreen2.default,
-                title: '姓名编辑',
+                title: '产品详情',
                 passProps: { index: index },
                 barTintColor: 'red'
             });
-        }, _this._onPress = function (item, index) {
+        };
 
-            _this.props.navigator.push({
-                component: _ProductDetailScreen2.default,
-                title: '姓名编辑',
-                passProps: { index: index },
-                barTintColor: 'red'
+        _this._renderItem = function (_ref) {
+            var item = _ref.item,
+                index = _ref.index;
+            return _react3.default.createElement(_ProductListCell2.default, {
+                onPressItem: _this._onPressItem,
+                item: item,
+                index: index,
+                title: item.title, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 54
+                }
             });
-        }, _this._renderItem = function (_ref2) {
-            var item = _ref2.item,
-                index = _ref2.index;
+        };
 
-
+        _this._header = function () {
             return _react3.default.createElement(
                 _reactNative.View,
                 { style: { flex: 1 }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 73
-                    }
-                },
-                _react3.default.createElement(
-                    _reactNative.TouchableHighlight,
-                    {
-                        onPress: _this._onPress(item, index), __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 74
-                        }
-                    },
-                    _react3.default.createElement(
-                        _reactNative.Text,
-                        { style: { fontWeight: 'bold', fontSize: 20, height: 50 }, __source: {
-                                fileName: _jsxFileName,
-                                lineNumber: 76
-                            }
-                        },
-                        '\u6211\u662F\u4F60'
-                    )
-                )
-            );
-        }, _this._header = function () {
-            return _react3.default.createElement(
-                _reactNative.View,
-                { style: { flex: 1 }, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 83
+                        lineNumber: 69
                     }
                 },
                 _react3.default.createElement(
                     _reactNative.Text,
                     { style: { fontWeight: 'bold', fontSize: 20, height: 50 }, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 84
+                            lineNumber: 70
                         }
                     },
                     '\u70ED\u95E8\u7535\u5F71'
                 )
             );
-        }, _this._footer = function () {
+        };
+
+        _this._footer = function () {
             return _react3.default.createElement(
                 _reactNative.Text,
                 { style: { fontSize: 14, alignSelf: 'center' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 90
+                        lineNumber: 75
                     }
                 },
                 '\u5230\u5E95\u5566\uFF0C\u6CA1\u6709\u5566\uFF01'
             );
-        }, _this._createEmptyView = function () {
+        };
+
+        _this._createEmptyView = function () {
             return _react3.default.createElement(
                 _reactNative.Text,
                 { style: { fontSize: 40, alignSelf: 'center' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 95
+                        lineNumber: 79
                     }
                 },
                 '\u8FD8\u6CA1\u6709\u6570\u636E\u54E6\uFF01'
             );
-        }, _this._ItemDivideComponent = function () {
+        };
+
+        _this._ItemDivideComponent = function () {
             return _react3.default.createElement(_reactNative.View, { style: { height: 1, backgroundColor: 'skyblue' }, __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 100
+                    lineNumber: 83
                 }
             });
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        };
+
+        _this.state = {
+            data: _this._flatListData,
+            refreshing: false
+        };
+        return _this;
     }
 
     _createClass(ProductScreen, [{
+        key: 'onButtonPress',
+        value: function onButtonPress() {
+            this._flatList.scrollToIndex({ viewPosition: 0, index: this.state.text });
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
@@ -68563,17 +68555,21 @@ var ProductScreen = _wrapComponent('ProductScreen')(function (_React$Component) 
                 _reactNative.View,
                 { style: { flex: 1 }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 106
+                        lineNumber: 89
                     }
                 },
                 _react3.default.createElement(_reactNative.FlatList, {
                     data: this.state.data,
+
+                    ref: function ref(flatList) {
+                        return _this2._flatList = flatList;
+                    },
                     extraData: this.state,
                     renderItem: this._renderItem,
                     keyExtractor: this._keyExtractor,
                     refreshing: this.state.refreshing,
                     ItemSeparatorComponent: this._ItemDivideComponent,
-                    ListEmptyComponent: this._createEmptyView(),
+                    ListEmptyComponent: this._createEmptyView,
                     ListFooterComponent: this._footer,
                     ListHeaderComponent: this._header,
                     getItemLayout: function getItemLayout(data, index) {
@@ -68586,8 +68582,8 @@ var ProductScreen = _wrapComponent('ProductScreen')(function (_React$Component) 
                         }, 1000);
                     },
                     onEndReachedThreshold: 0.1,
-                    onEndReached: function onEndReached(_ref3) {
-                        var distanceFromEnd = _ref3.distanceFromEnd;
+                    onEndReached: function onEndReached(_ref2) {
+                        var distanceFromEnd = _ref2.distanceFromEnd;
                         return setTimeout(function () {
                             _this2.setState(function (state) {
                                 return {};
@@ -68596,7 +68592,7 @@ var ProductScreen = _wrapComponent('ProductScreen')(function (_React$Component) 
                     },
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 107
+                        lineNumber: 90
                     }
                 })
             );
@@ -68810,37 +68806,34 @@ var ProductListCell = _wrapComponent('ProductListCell')(function (_React$Compone
         _this._onPress = function () {
             var _this$props = _this.props,
                 onPressItem = _this$props.onPressItem,
-                id = _this$props.id;
+                item = _this$props.item,
+                index = _this$props.index;
 
-
-            onPressItem(id);
+            onPressItem(item, index);
         };
 
-        _this.state = {
-            disable: false
-        };
         return _this;
     }
 
     _createClass(ProductListCell, [{
         key: 'render',
         value: function render() {
-            var title = this.props.title;
+            var item = this.props.item;
 
 
             return _react3.default.createElement(
                 _reactNative.View,
-                { style: { flex: 1, backgroundColor: 'powderblue' }, __source: {
+                { style: { flex: 1, backgroundColor: 'powderblue', height: 50 }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 32
+                        lineNumber: 28
                     }
                 },
                 _react3.default.createElement(
                     _reactNative.TouchableHighlight,
                     {
-                        onPress: this._onPress(), __source: {
+                        onPress: this._onPress, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 33
+                            lineNumber: 29
                         }
                     },
                     _react3.default.createElement(
@@ -68848,11 +68841,11 @@ var ProductListCell = _wrapComponent('ProductListCell')(function (_React$Compone
                         {
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 35
+                                lineNumber: 31
                             }
                         },
                         ' ',
-                        title,
+                        item.title,
                         ' '
                     )
                 )

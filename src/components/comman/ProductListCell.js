@@ -13,26 +13,22 @@ export default class ProductListCell extends React.Component {
     //构造
     constructor(props) {
         super(props);
-        this.state = {
-            disable: false,
-        };
     }
 
-    _onPress=()=>{
-        const {onPressItem,id} = this.props;
-
-        onPressItem(id);
+    _onPress = () => {
+        const {onPressItem,item,index} = this.props;
+        onPressItem(item,index);
     };
 
     render(){
 
-        const {title} = this.props;
+        const {item} = this.props;
 
         return(
-            <View style={{flex: 1, backgroundColor: 'powderblue'}}>
+            <View style={{flex: 1, backgroundColor: 'powderblue',height:50}}>
                 <TouchableHighlight
-                    onPress={this._onPress()}>
-                    <Text> {title} </Text>
+                    onPress={this._onPress}>
+                    <Text> {item.title} </Text>
                 </TouchableHighlight>
             </View>
         );
