@@ -68459,12 +68459,12 @@ var ProductScreen = _wrapComponent('ProductScreen')(function (_React$Component) 
         };
 
         _this._onPressItem = function (item, index) {
-
             _this.props.navigator.push({
                 component: _ProductDetailScreen2.default,
                 title: '产品详情',
                 passProps: { index: index },
                 barTintColor: 'red'
+
             });
         };
 
@@ -68477,24 +68477,40 @@ var ProductScreen = _wrapComponent('ProductScreen')(function (_React$Component) 
                 index: index,
                 title: item.title, __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 54
+                    lineNumber: 53
                 }
             });
+        };
+
+        _this._onRefresh = function () {
+            _this.setState({ refreshing: true });
+            setTimeout(function () {
+                _this.setState({ refreshing: false });
+            }, 1000);
+        };
+
+        _this._onReloadMore = function (_ref2) {
+            var distanceFromEnd = _ref2.distanceFromEnd;
+            return setTimeout(function () {
+                _this.setState(function (state) {
+                    return {};
+                });
+            }, 3000);
         };
 
         _this._header = function () {
             return _react3.default.createElement(
                 _reactNative.View,
-                { style: { flex: 1 }, __source: {
+                { style: { flex: 1, flexDirection: 'row', justifyContent: 'center', backgroundColor: 'red', height: 50 }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 69
+                        lineNumber: 81
                     }
                 },
                 _react3.default.createElement(
                     _reactNative.Text,
-                    { style: { fontWeight: 'bold', fontSize: 20, height: 50 }, __source: {
+                    { style: { fontWeight: 'bold', fontSize: 20, alignSelf: 'center', backgroundColor: 'blue' }, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 70
+                            lineNumber: 82
                         }
                     },
                     '\u70ED\u95E8\u7535\u5F71'
@@ -68504,32 +68520,48 @@ var ProductScreen = _wrapComponent('ProductScreen')(function (_React$Component) 
 
         _this._footer = function () {
             return _react3.default.createElement(
-                _reactNative.Text,
-                { style: { fontSize: 14, alignSelf: 'center' }, __source: {
+                _reactNative.View,
+                { style: { flex: 1, flexDirection: 'row', justifyContent: 'center', backgroundColor: 'blue', height: 40 }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 75
+                        lineNumber: 87
                     }
                 },
-                '\u5230\u5E95\u5566\uFF0C\u6CA1\u6709\u5566\uFF01'
+                _react3.default.createElement(
+                    _reactNative.Text,
+                    { style: { fontSize: 14, alignSelf: 'center', backgroundColor: 'red' }, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 88
+                        }
+                    },
+                    '\u5230\u5E95\u5566\uFF0C\u6CA1\u6709\u5566\uFF01'
+                )
             );
         };
 
         _this._createEmptyView = function () {
             return _react3.default.createElement(
-                _reactNative.Text,
-                { style: { fontSize: 40, alignSelf: 'center' }, __source: {
+                _reactNative.View,
+                { style: { flex: 1, flexDirection: 'row', justifyContent: 'center', backgroundColor: 'yellow', height: 200 }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 79
+                        lineNumber: 93
                     }
                 },
-                '\u8FD8\u6CA1\u6709\u6570\u636E\u54E6\uFF01'
+                _react3.default.createElement(
+                    _reactNative.Text,
+                    { style: { fontSize: 40, alignSelf: 'center' }, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 94
+                        }
+                    },
+                    '\u8FD8\u6CA1\u6709\u6570\u636E\u54E6\uFF01'
+                )
             );
         };
 
         _this._ItemDivideComponent = function () {
-            return _react3.default.createElement(_reactNative.View, { style: { height: 1, backgroundColor: 'skyblue' }, __source: {
+            return _react3.default.createElement(_reactNative.View, { style: { height: 0.5, backgroundColor: 'white' }, __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 83
+                    lineNumber: 99
                 }
             });
         };
@@ -68555,7 +68587,7 @@ var ProductScreen = _wrapComponent('ProductScreen')(function (_React$Component) 
                 _reactNative.View,
                 { style: { flex: 1 }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 89
+                        lineNumber: 105
                     }
                 },
                 _react3.default.createElement(_reactNative.FlatList, {
@@ -68575,24 +68607,12 @@ var ProductScreen = _wrapComponent('ProductScreen')(function (_React$Component) 
                     getItemLayout: function getItemLayout(data, index) {
                         return { length: 44, offset: (44 + 1) * index, index: index };
                     },
-                    onRefresh: function onRefresh() {
-                        _this2.setState({ refreshing: true });
-                        setTimeout(function () {
-                            _this2.setState({ refreshing: false });
-                        }, 1000);
-                    },
+                    onRefresh: this._onRefresh,
                     onEndReachedThreshold: 0.1,
-                    onEndReached: function onEndReached(_ref2) {
-                        var distanceFromEnd = _ref2.distanceFromEnd;
-                        return setTimeout(function () {
-                            _this2.setState(function (state) {
-                                return {};
-                            });
-                        }, 3000);
-                    },
+                    onEndReached: this._onReloadMore,
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 90
+                        lineNumber: 106
                     }
                 })
             );
@@ -68831,6 +68851,7 @@ var ProductListCell = _wrapComponent('ProductListCell')(function (_React$Compone
                 _react3.default.createElement(
                     _reactNative.TouchableHighlight,
                     {
+                        style: { flex: 1 },
                         onPress: this._onPress, __source: {
                             fileName: _jsxFileName,
                             lineNumber: 29
@@ -68838,10 +68859,9 @@ var ProductListCell = _wrapComponent('ProductListCell')(function (_React$Compone
                     },
                     _react3.default.createElement(
                         _reactNative.Text,
-                        {
-                            __source: {
+                        { style: { flex: 1, backgroundColor: 'green' }, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 31
+                                lineNumber: 32
                             }
                         },
                         ' ',

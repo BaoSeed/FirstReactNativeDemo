@@ -27,8 +27,9 @@ export default class ProductListCell extends React.Component {
         return(
             <View style={{flex: 1, backgroundColor: 'powderblue',height:50}}>
                 <TouchableHighlight
+                    style={{flex: 1}}
                     onPress={this._onPress}>
-                    <Text> {item.title} </Text>
+                    <Text style={{flex: 1,backgroundColor:'green'}}> {item.title} </Text>
                 </TouchableHighlight>
             </View>
         );

@@ -18,7 +18,6 @@ export default class  ProductScreen extends  React.Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             data:this._flatListData,
             refreshing:false,
@@ -37,25 +36,38 @@ export default class  ProductScreen extends  React.Component {
             {title: 'Julie'},
         ];
 
+
     _keyExtractor = (item, index) => index;
 
     _onPressItem = (item,index)=>{
-
         this.props.navigator.push({
             component:ProductDetailScreen,
             title:'产品详情',
             passProps:{index:index},
-            barTintColor:'red'
+            barTintColor:'red',
+
         });
     };
 
     _renderItem=({item,index})=> (
-
         <ProductListCell
             onPressItem={this._onPressItem}
             item={item}
             index={index}
             title={item.title}/>
+    );
+
+    _onRefresh=()=>{
+        this.setState({refreshing: true});
+        setTimeout(()=>{
+            this.setState({refreshing: false});
+        },1000);
+    };
+
+    _onReloadMore=({distanceFromEnd}) => (
+        setTimeout(() => {
+          this.setState((state) => ({}));
+        }, 3000)
     );
 
     //点击按钮跳转到指定行
@@ -66,21 +78,25 @@ export default class  ProductScreen extends  React.Component {
     };
 
     _header=()=>(
-        <View style={{flex:1}}>
-        <Text style={{fontWeight:'bold',fontSize:20,height:50}}>热门电影</Text>
+        <View style={{flex:1,flexDirection:'row',justifyContent:'center',backgroundColor:'red',height:50}}>
+        <Text style={{fontWeight:'bold',fontSize:20,alignSelf:'center',backgroundColor:'blue'}}>热门电影</Text>
         </View>
      );
 
     _footer=()=>(
-        <Text style={{fontSize: 14, alignSelf: 'center'}}>到底啦，没有啦！</Text>
+        <View style={{flex:1,flexDirection:'row',justifyContent:'center',backgroundColor:'blue',height:40}}>
+        <Text style={{fontSize: 14, alignSelf: 'center',backgroundColor:'red'}}>到底啦，没有啦！</Text>
+        </View>
     );
 
     _createEmptyView=()=> (
-       <Text style={{fontSize: 40, alignSelf: 'center'}}>还没有数据哦！</Text>
+        <View style={{flex:1,flexDirection:'row',justifyContent:'center',backgroundColor:'yellow',height:200}}>
+        <Text style={{fontSize: 40,alignSelf: 'center'}}>还没有数据哦！</Text>
+        </View>
     );
 
     _ItemDivideComponent=()=>(
-        <View style={{height: 1, backgroundColor: 'skyblue'}}/>
+        <View style={{height:0.5, backgroundColor: 'white'}}/>
     );
 
     render() {
@@ -100,32 +116,11 @@ export default class  ProductScreen extends  React.Component {
                     ListFooterComponent={this._footer}
                     ListHeaderComponent={this._header}
                     getItemLayout={(data, index) => ( {length: 44, offset: (44 + 1) * index, index} )}
-                    onRefresh={()=>{
-                        this.setState({refreshing: true});
-                        setTimeout(()=>{
-                            this.setState({refreshing: false});
-                        },1000);
-                    }}
+                    onRefresh={this._onRefresh}
                     onEndReachedThreshold={0.1}
-                    onEndReached={({distanceFromEnd}) => (
-                        setTimeout(() => {
-                            this.setState((state) => ({}));
-                        }, 3000)
-                    )}
+                    onEndReached={this._onReloadMore}
                 />
                 </View>
-            /*
-            <View style={styles.SectionListcontainer}>
-            <SectionList
-            sections={[
-            {title: 'D', data: ['Devin']},
-            {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
-             ]}
-             renderItem={({item}) => <Text style={styles.SectionListitem}> {item} </Text>}
-            renderSectionHeader={({section}) => <Text style={styles.sectionHeader}> {section.title} </Text>}
-             />
-           </View>
-           */
         );
     }
 }
